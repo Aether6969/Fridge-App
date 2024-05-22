@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Fridge_App.Pages
+namespace FridgeApp.Pages
 {
     public class IndexModel : PageModel
     {
