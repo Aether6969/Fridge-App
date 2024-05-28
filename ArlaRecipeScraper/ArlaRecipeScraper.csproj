@@ -7,4 +7,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="4.21.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="125.0.6422.7800" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FrigeCore\FrigeCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
