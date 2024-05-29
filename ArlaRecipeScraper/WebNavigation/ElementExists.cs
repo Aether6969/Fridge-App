@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace ArlaRecipeScraper
+namespace RecipeWebScraper
 {
     public static partial class WebNavigation
     {

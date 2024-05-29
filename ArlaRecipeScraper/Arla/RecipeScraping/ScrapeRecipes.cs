@@ -1,36 +1,35 @@
-﻿using static ArlaRecipeScraper.WebNavigation;
-using OpenQA.Selenium.Chrome;
+﻿using static RecipeWebScraper.WebNavigation;
 using OpenQA.Selenium;
+using System.Text.RegularExpressions;
 
-namespace ArlaRecipeScraper.Arla
+namespace RecipeWebScraper.Arla
 {
-    public static partial class ArlaRecipeScraping
+    public static partial class RecipeScraping
     {
-        public static RecipeSurrogate[] ScrapeArlaRecipes(IEnumerable<string> links)
+        private static Regex _ingNameReg = new Regex(@"(?<=u-text-lowercase..>)[^<]*", RegexOptions.Compiled);
+        private static Regex _ingAmountReg = new Regex(@"(?<=u-mr--xxs..>)[^<]*", RegexOptions.Compiled);
+
+        public static RecipeSurrogate[] ScrapeArlaRecipes(WebDriver driver, IEnumerable<string> links)
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("headless");
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            using (WebDriver driver = new ChromeDriver(options))
+            List<RecipeSurrogate> recipes = [];
+            foreach (string link in links)
             {
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                RecipeSurrogate recipeInfo = ScrapeArlaRecipe(driver, link);
 
-                List<RecipeSurrogate> recipes = [];
-                foreach (string link in links)
-                {
-                    RecipeSurrogate recipeInfo = ScrapeArlaRecipe(driver, link);
-
-                    recipes.Add(recipeInfo);
-                }
-
-                return recipes.ToArray();
+                recipes.Add(recipeInfo);
             }
+
+            return recipes.ToArray();
         }
         private static RecipeSurrogate ScrapeArlaRecipe(WebDriver driver, string link)
         {
             driver.Navigate().GoToUrl(link);
 
-            //Give the webpage time to load and prevent sending to many requests at once
+            //TODO: Set number of persons to 1
+
+            //Give the webpage time to load and prevent sending to many requests at to fast
             Thread.Sleep(100);
 
             RecipeSurrogate recipe = new RecipeSurrogate();
@@ -59,26 +58,37 @@ namespace ArlaRecipeScraper.Arla
             string xPathIt = "/html/body/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]";
             IWebElement ingrediantsTableElement = driver.FindElement(By.XPath(xPathIt));
             IWebElement[] ingrediantElements = ingrediantsTableElement.FindElements(By.ClassName("u-width-70")).ToArray();
+            
             (string, string)[] ingrediantAmounts = new (string, string)[ingrediantElements.Length];
             for (int i = 0; i < ingrediantAmounts.Length; i++)
             {
-                //IWebElement ingrediantNameElement = ingrediantElements[i].FindElement(By.ClassName("u-mr--xxs"));
+                //TODO: is bad also consider selenium api if plausable
+                string ingrediantHtml = ingrediantElements[i].GetAttribute("innerHTML");
 
-                //TODO: figure out how to grab name and amount seperatly
-                string name = ingrediantElements[i].Text;
-                string amount = "";
+                var hc = new string(ingrediantHtml.SelectMany<char, char>((x) => x == '"' ? ['\\', '"'] : [x]).ToArray());
+
+                Match match = _ingNameReg.Match(hc);
+
+                string name = string.Empty;
+                string amount = string.Empty;
+
+                if (match.Success)
+                {
+                    name = match.Value.Trim();
+                    amount = _ingAmountReg.Match(hc).Value.Trim();
+                }
+                else
+                {
+                    name = ingrediantElements[i].Text.Trim();
+                }
 
                 ingrediantAmounts[i] = (name, amount);
             }
-            recipe.IngrediantsAmount = $"[{string.Join(',', ingrediantAmounts.Select((x) => x.ToString()))}]"; //TODO:
+            recipe.IngrediantsAmount = $"""[{string.Join(',', ingrediantAmounts.Select((x) => x.ToString()))}]"""; //TODO: add " to start and end and bad
 
             string xPathImg = "/html/body/div[1]/div[1]/div[2]/div[1]/div[1]/picture/img";
             IWebElement imageElement = driver.FindElement(By.XPath(xPathImg));
             recipe.ImageLink = imageElement.GetAttribute("src");
-
-            recipe.EnergyKj = ""; //TODO: oh oh
-
-            recipe.NutritionalInfo = ""; //TODO:
 
             return recipe;
         }

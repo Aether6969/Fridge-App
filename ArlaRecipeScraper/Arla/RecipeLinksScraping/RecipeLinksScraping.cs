@@ -1,6 +1,6 @@
-﻿namespace ArlaRecipeScraper.Arla
+﻿namespace RecipeWebScraper.Arla
 {
-    public static partial class ArlaRecipeLinksScraping
+    public static partial class RecipeLinksScraping
     {
         private static readonly string ArlaRecipesBaseUrl = "https://www.arla.dk/opskrifter";
 

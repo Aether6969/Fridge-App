@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ArlaRecipeScraper
+namespace RecipeWebScraper
 {
     public static partial class DataManegement
     {
@@ -25,8 +25,6 @@ namespace ArlaRecipeScraper
                     Rating              = attributes[5],
                     IngrediantsAmount   = attributes[6],
                     ImageLink           = attributes[7],
-                    EnergyKj            = attributes[8],
-                    NutritionalInfo     = attributes[9],
                 };
 
                 yield return item;

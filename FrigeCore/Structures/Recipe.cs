@@ -10,8 +10,6 @@
         public double Rating;
         public (string, int)[] IngrediantsAmount;
         public string ImageLink;
-        public int EnergyKj;
-        public (string, double)[] NutritionalInfo;
 
         public override string ToString()
         {

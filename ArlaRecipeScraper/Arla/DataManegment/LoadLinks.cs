@@ -1,4 +1,6 @@
-﻿namespace ArlaRecipeScraper
+﻿using OpenQA.Selenium;
+
+namespace RecipeWebScraper.Arla
 {
     public static partial class DataManegement
     {

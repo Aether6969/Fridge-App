@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FridgeApp", "FridgeApp\FridgeApp.csproj", "{A1EB4489-2CC4-4E6F-8D28-36CA34C307BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArlaRecipeScraper", "ArlaRecipeScraper\ArlaRecipeScraper.csproj", "{00A62D47-484E-460B-BE41-635ADD78B46E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeWebScraper", "ArlaRecipeScraper\RecipeWebScraper.csproj", "{00A62D47-484E-460B-BE41-635ADD78B46E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrigeCore", "FrigeCore\FrigeCore.csproj", "{A61BFFC5-DB40-428F-AA33-096A9D2DDF35}"
 EndProject
