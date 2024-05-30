@@ -1,9 +1,9 @@
 ﻿using FrigeCore.Structures;
+using RecipeWebScraper.Arla;
 using static RecipeWebScraper.Arla.RecipeScraping;
 using static RecipeWebScraper.Arla.RecipeLinksScraping;
-using static RecipeWebScraper.DataManegement;
+using static RecipeWebScraper.Arla.DataManegement;
 using static RecipeWebScraper.Arla.DataCleaning;
-using RecipeWebScraper;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 
