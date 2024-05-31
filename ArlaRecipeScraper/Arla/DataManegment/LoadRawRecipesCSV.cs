@@ -13,6 +13,8 @@ namespace RecipeWebScraper.Arla
 
             foreach (string line in lines.Skip(1))
             {
+                // TODO: Do we read the IngrediantsAmount correctly here?
+                // in the csv file they are organized as [(Gær, 50 g),(Vand, 3 dl),...]
                 string[] attributes = line.Split(',').Select((x) => x.Trim()).ToArray();
 
                 RecipeSurrogate item = new RecipeSurrogate()
