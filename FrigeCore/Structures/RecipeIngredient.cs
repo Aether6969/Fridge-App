@@ -3,7 +3,7 @@
     public struct RecipeIngredient
     {
         public string Name;
-        public int Amount;
+        public double Amount;
         public string Unit;    
     }
 }
