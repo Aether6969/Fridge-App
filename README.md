@@ -1,14 +1,14 @@
 # DATABASE SETUP
-The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) and run the following commands to setup the database for the app:
+The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder and run the following commands to setup the database for the app:
 
     psql -h localhost -d <database_name> -U <database_username> < create_db.sql 
     psql -h localhost -d <database_name> -U <database_username> < load_db.sql 
 
-_database_name_ is the name of the database where the tables are to be added. This could be dis2024_g24. 
+_database_name_ is the name of the database where the tables are to be added. This could be dis2024_g64. 
 
 _database_username_ is the name of the user that you want to use to edit the database.
 
-The create_db script creates a user g64_user that is used by the app.
+The create_db script creates a superuser called g64_user that is used by the app.
 
 In order to clean up the database after use, run the drop_sql script:
 
@@ -16,7 +16,6 @@ In order to clean up the database after use, run the drop_sql script:
 
 Depending on your setup, each call into psql may require entering the password for the database user.
 
-TODO: Check how it works in Windows
 TODO: Should the create and load scripts be merged?
 TODO: Do we add the user in the sql script?
 TODO: ER diagram here or elsewhere in project?
