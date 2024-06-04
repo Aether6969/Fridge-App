@@ -9,11 +9,6 @@
         public bool IsFreezable;
         public int Rating;
         public string ImageLink;
-        public (string, int)[] IngrediantsAmount;
-
-        public override string ToString()
-        {
-            return $"({Name}, {Enum.GetName(RecipeType)}, {TotalTimeMin}, {IsFreezable}, {Rating}%)";
-        }
+        public RecipeIngredient[] IngrediantsAmount;
     }
 }

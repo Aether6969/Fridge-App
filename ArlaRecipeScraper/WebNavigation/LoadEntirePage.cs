@@ -15,7 +15,6 @@ namespace RecipeWebScraper
 
                 var newHeight = (long)driver.ExecuteScript("return document.body.scrollHeight");
 
-                // TODO: Should we also require that the height increases?
                 if (lastHeight == newHeight)
                 {
                     break;

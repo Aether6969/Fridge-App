@@ -1,10 +1,9 @@
 ﻿namespace FrigeCore.Structures
 {
-    public struct Ingredient
+    public struct RecipeIngredient
     {
         public string Name;
-        //Measurement?
         public int Amount;
-        public int Price;
+        public string Unit;    
     }
 }

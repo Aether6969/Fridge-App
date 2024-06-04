@@ -49,7 +49,6 @@ internal class Program
         {
             IEnumerable<string> links = LoadLinks(RecipeLinksPath);
 
-            links = ["https://www.arla.dk/opskrifter/pizzasnegle-med-skinke/"]; //TEST:
             RecipeSurrogate[] recipes = ScrapeArlaRecipes(driver, links);
 
             SaveRawRecipesCSV(RawRecipesPath, recipes);

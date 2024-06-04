@@ -13,8 +13,6 @@ namespace RecipeWebScraper.Arla
 
         public static RecipeSurrogate[] ScrapeArlaRecipes(WebDriver driver, IEnumerable<string> links)
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
             List<RecipeSurrogate> recipes = [];
             foreach (string link in links)
             {
@@ -45,15 +43,22 @@ namespace RecipeWebScraper.Arla
             recipe.RecipeType = (string)driver.ExecuteScript("""return gtmData["recipeMealType"]""");
 
             string xPathTt = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div/span";
-            IWebElement totalTimeMinElement = driver.FindElement(By.XPath(xPathTt));
-            recipe.TotalTimeMin = totalTimeMinElement.Text;
+            try
+            {
+                IWebElement totalTimeMinElement = driver.FindElement(By.XPath(xPathTt));
+                recipe.TotalTimeMin = totalTimeMinElement.Text;
+            }
+            catch
+            {
+                recipe.TotalTimeMin = "0";
+            }
 
             string xPathFr = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[2]";
             bool isFreezable = ElementExists(driver, By.XPath(xPathFr));
             recipe.IsFreezable = isFreezable.ToString();
 
             string xPathRat = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[2]/div/div/div/div/div[2]";
-            IWebElement ratingElement = driver.FindElement(By.XPath(xPathRat));
+            IWebElement ratingElement = driver.FindElement(By.ClassName("c-rating-static__selected"));
             recipe.Rating = ratingElement.GetAttribute("style");
 
             string xPathImg = "/html/body/div[1]/div[1]/div[2]/div[1]/div[1]/picture/img";
