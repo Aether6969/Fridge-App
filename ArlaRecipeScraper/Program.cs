@@ -49,7 +49,7 @@ internal class Program
         {
             IEnumerable<string> links = LoadLinks(RecipeLinksPath);
 
-            RecipeSurrogate[] recipes = ScrapeArlaRecipes(driver, links);
+            IEnumerable<RecipeSurrogate> recipes = ScrapeArlaRecipes(driver, links);
 
             SaveRawRecipesCSV(RawRecipesPath, recipes);
         }

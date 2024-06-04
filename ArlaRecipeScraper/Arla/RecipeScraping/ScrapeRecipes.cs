@@ -11,63 +11,62 @@ namespace RecipeWebScraper.Arla
 
         private static readonly string fcQuote = new string(new char[] { '\\', '"' });
 
-        public static RecipeSurrogate[] ScrapeArlaRecipes(WebDriver driver, IEnumerable<string> links)
+        public static IEnumerable<RecipeSurrogate> ScrapeArlaRecipes(WebDriver driver, IEnumerable<string> links)
         {
-            List<RecipeSurrogate> recipes = [];
             foreach (string link in links)
             {
-                RecipeSurrogate recipeInfo = ScrapeArlaRecipe(driver, link);
-
-                recipes.Add(recipeInfo);
+                yield return ScrapeArlaRecipe(driver, link);
             }
-
-            return recipes.ToArray();
         }
         private static RecipeSurrogate ScrapeArlaRecipe(WebDriver driver, string link)
         {
             driver.Navigate().GoToUrl(link);
 
-            //TODO: Set number of persons to 1
-
-            //Give the webpage time to load and prevent sending to many requests to fast
+            //Gives the webpage time to load and prevents sending to many requests to fast
             Thread.Sleep(100);
-
-            RecipeSurrogate recipe = new RecipeSurrogate();
 
             string xPathNa = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/h1";
             IWebElement nameElement = driver.FindElement(By.XPath(xPathNa));
-            recipe.Name = nameElement.Text;
+            string Name = nameElement.Text;
 
-            recipe.Link = link;
+            string Link = link;
 
-            recipe.RecipeType = (string)driver.ExecuteScript("""return gtmData["recipeMealType"]""");
+            string RecipeType = (string)driver.ExecuteScript("""return gtmData["recipeMealType"]""");
 
             string xPathTt = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div/span";
+            string TotalTimeMin = "0";
             try
             {
                 IWebElement totalTimeMinElement = driver.FindElement(By.XPath(xPathTt));
-                recipe.TotalTimeMin = totalTimeMinElement.Text;
+                TotalTimeMin = totalTimeMinElement.Text;
             }
-            catch
-            {
-                recipe.TotalTimeMin = "0";
-            }
+            catch { }
 
             string xPathFr = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[2]";
             bool isFreezable = ElementExists(driver, By.XPath(xPathFr));
-            recipe.IsFreezable = isFreezable.ToString();
+            string IsFreezable = isFreezable.ToString();
 
             string xPathRat = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[2]/div/div/div/div/div[2]";
             IWebElement ratingElement = driver.FindElement(By.ClassName("c-rating-static__selected"));
-            recipe.Rating = ratingElement.GetAttribute("style");
+            string Rating = ratingElement.GetAttribute("style");
 
             string xPathImg = "/html/body/div[1]/div[1]/div[2]/div[1]/div[1]/picture/img";
             IWebElement imageElement = driver.FindElement(By.XPath(xPathImg));
-            recipe.ImageLink = imageElement.GetAttribute("src");
+            string ImageLink = imageElement.GetAttribute("src");
 
-            recipe.IngrediantsAmount = GetIngrediants(driver); //TODO: add " to start and end and remove ,()[] from ingrediant and bad
+            string IngrediantsAmount = GetIngrediants(driver); //TODO: add " to start and end and remove ,()[] from ingrediant and bad
 
-            return recipe;
+            return new RecipeSurrogate() 
+            { 
+                Name = Name,
+                Link = link,
+                RecipeType = RecipeType,
+                TotalTimeMin = TotalTimeMin,
+                IsFreezable = IsFreezable,
+                Rating = Rating,
+                ImageLink = ImageLink,
+                IngrediantsAmount = IngrediantsAmount,
+            };
         }
         private static string GetIngrediants(WebDriver driver)
         {

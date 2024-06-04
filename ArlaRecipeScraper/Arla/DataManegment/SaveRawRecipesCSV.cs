@@ -6,26 +6,22 @@ namespace RecipeWebScraper.Arla
 {
     public static partial class DataManegement
     {
-        public static void SaveRawRecipesCSV(string path, RecipeSurrogate[] rawRecpies)
+        public static void SaveRawRecipesCSV(string path, IEnumerable<RecipeSurrogate> rawRecpies)
         {
-            StringBuilder sb = new StringBuilder();
-
-            //TODO: rewrite (make static?)
-            string header = $"{string.Join(',', typeof(RecipeSurrogate).GetFields(BindingFlags.Instance | BindingFlags.Public).Select((x) => x.Name))},";
-            sb.AppendLine(header);
-
-            for (int i = 0; i < rawRecpies.Length; i++)
+            using (StreamWriter sw = new StreamWriter(path))
             {
-                RecipeSurrogate e = rawRecpies[i];
+                string header = $"{string.Join(',', typeof(RecipeSurrogate).GetFields(BindingFlags.Instance | BindingFlags.Public).Select((x) => x.Name))},";
+                sw.WriteLine(header);
 
-                //TODO: line to long, maybe use reflection
-                string s = 
-                    $"""
-                    "{e.Name}","{e.Link}","{e.RecipeType}","{e.TotalTimeMin}","{e.IsFreezable}","{e.Rating}","{e.ImageLink}","{e.IngrediantsAmount}",
-                    """;
-                sb.AppendLine(s);
+                foreach (RecipeSurrogate recipe in rawRecpies)
+                {
+                    string s =
+                        $"""
+                        "{recipe.Name}","{recipe.Link}","{recipe.RecipeType}","{recipe.TotalTimeMin}","{recipe.IsFreezable}","{recipe.Rating}","{recipe.ImageLink}","{recipe.IngrediantsAmount}",
+                        """;
+                    sw.WriteLine(s);
+                }
             }
-            File.WriteAllText(path, sb.ToString());
         }
     }
 }
