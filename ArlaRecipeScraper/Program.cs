@@ -52,7 +52,7 @@ internal class Program
             links = ["https://www.arla.dk/opskrifter/pizzasnegle-med-skinke/"]; //TEST:
             RecipeSurrogate[] recipes = ScrapeArlaRecipes(driver, links);
 
-            RecipeWebScraper.DataManegement.SaveRawRecipesCSV(RawRecipesPath, recipes);
+            SaveRawRecipesCSV(RawRecipesPath, recipes);
         }
 
         if (cleanRecipes)
