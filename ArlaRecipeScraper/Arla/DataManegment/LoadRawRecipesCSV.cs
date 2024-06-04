@@ -13,8 +13,9 @@ namespace RecipeWebScraper.Arla
 
             foreach (string line in lines.Skip(1))
             {
+                //TODO: insted of spilt match between " "
                 string[] attributes = line.Split(',').Select((x) => x.Trim()).ToArray();
-
+                
                 RecipeSurrogate item = new RecipeSurrogate()
                 {
                     Name                = attributes[0],
@@ -23,8 +24,8 @@ namespace RecipeWebScraper.Arla
                     TotalTimeMin        = attributes[3],
                     IsFreezable         = attributes[4],
                     Rating              = attributes[5],
-                    IngrediantsAmount   = attributes[6],
-                    ImageLink           = attributes[7],
+                    ImageLink           = attributes[6],
+                    IngrediantsAmount   = attributes[7],
                 };
 
                 yield return item;

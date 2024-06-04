@@ -7,9 +7,9 @@
         public RecipeType RecipeType;
         public int TotalTimeMin;
         public bool IsFreezable;
-        public double Rating;
-        public (string, int)[] IngrediantsAmount;
+        public int Rating;
         public string ImageLink;
+        public (string, int)[] IngrediantsAmount;
 
         public override string ToString()
         {

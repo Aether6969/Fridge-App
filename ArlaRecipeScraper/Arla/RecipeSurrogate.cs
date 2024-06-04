@@ -11,9 +11,8 @@ namespace RecipeWebScraper.Arla
         public string TotalTimeMin;
         public string IsFreezable;
         public string Rating;
-        //TODO: move ImageLink to here
-        public string IngrediantsAmount;
         public string ImageLink;
+        public string IngrediantsAmount;
 
         static RecipeSurrogate()
         {

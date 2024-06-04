@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Text;
 
-namespace RecipeWebScraper
+namespace RecipeWebScraper.Arla
 {
     public static partial class DataManegement
     {
@@ -20,7 +20,7 @@ namespace RecipeWebScraper
                 //TODO: line to long, maybe use reflection
                 string s = 
                     $"""
-                    "{e.Name}","{e.Link}","{e.RecipeType}","{e.TotalTimeMin}","{e.IsFreezable}","{e.Rating}","{e.IngrediantsAmount}","{e.ImageLink}",
+                    "{e.Name}","{e.Link}","{e.RecipeType}","{e.TotalTimeMin}","{e.IsFreezable}","{e.Rating}","{e.ImageLink}","{e.IngrediantsAmount}",
                     """;
                 sb.AppendLine(s);
             }
