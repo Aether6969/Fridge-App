@@ -1,7 +1,9 @@
 -- Creates the tables and creates the user used by the app
 -- Load tables using load_db.sql
 -- Delete using drop_db.sql
+--
 -- psql -h localhost -d dis24g64 -U psql_user_name -W < create_db.sql
+--
 CREATE ROLE g64_user WITH
     LOGIN
     SUPERUSER
@@ -39,15 +41,6 @@ CREATE TABLE recipeIngredients(
     FOREIGN KEY(ingredient) REFERENCES ingredients(name)
 );
 
---CREATE TABLE fridges(
---    name TEXT,
-    --amount REAL,
-    --unit VARCHAR(7),
- --   PRIMARY KEY (name)--,
-    --FOREIGN KEY(recipe) REFERENCES recipes(name),
-    --FOREIGN KEY(ingredient) REFERENCES ingredients(name)
---);
-
 CREATE TABLE users(
     name TEXT, -- user names must be unique
     --password TEXT,
@@ -59,7 +52,7 @@ CREATE TABLE users(
 -- e.g. home or a cabin in the woods, regardless of being in a fridge,
 -- storage or freezer.
 CREATE TABLE fridges(
-	id INT,
+    id INT,
     owner TEXT,
     name TEXT, -- display name
     PRIMARY KEY (id),
