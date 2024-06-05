@@ -5,6 +5,79 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Fridge App</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-6 left-box">
+            <div class="left-content">
+                <div class="search-container-ingredients text-center">
+                    <h1 class="text-center mt-5">Fridge</h1>
+                    <h2 class="text-center mt-5">Add Ingredients</h2>
+                    <input class="text-center" type="text" id="searchInput" placeholder="Search...">
+                </div>
+                <div class="saved-ingredients">
+                    <h2 class="text-center mt-5">Saved Ingredients</h2>
+                    SAVED INGREDIENTS
+                    SAVED INGREDIENTS 
+                    SAVED INGREDIENTS
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 right-box">
+            <div class="search-container-recipies text-center"> <!-- Added text-center class -->
+                <h1 class="text-center">Recipes</h1>
+                <h2 class="text-center mt-5">Find Recipes</h2>
+                <input class="text-center" type="text" id="searchInput" placeholder="Search...">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .left-box {
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: flex;
+        align-items: stretch; /* Stretch items to fill container */
+    }
+    .right-box {
+        width: calc(50%);
+        background-color: #e9ecef;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .left-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; /* Grow to fill remaining space */
+    }
+    .search-container-ingredients {
+        width: Calc(100%);
+        height: 300px; /* Set default width for search container */
+        background-image: url('@Url.Content("~/images/fridgeTop.png")');
+        background-size: 100% 100%;
+        margin: 0 auto;
+    }
+    .search-container-recipies {
+        width: Calc(100%);
+        height: 300px; /* Set default width for search container */;
+        background-size: 100% 100%;
+        margin: 0 auto;
+    }
+    .saved-ingredients {
+        width: Calc(100%);
+        min-height: 2000px; /* Minimum width for the search results */
+        background-image: url('@Url.Content("~/images/fridgeBtm.png")');
+        background-size: 100% 100%;
+        flex-grow: 1; /* Grow to fill remaining space */
+        overflow-y: auto; /* Add scrollbar when needed */
+        margin: 0 auto;
+    }
+</style>
