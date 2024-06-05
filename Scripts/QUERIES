@@ -1,22 +1,17 @@
 
--- search recipie by type and name (recipietypequery as set of all types default, rquery as empty string as default)
-select recipes.name AS results
-FROM recipes 
-WHERE (recipes.recipetype IN ('salty','oily')) AND name LIKE '%pi%'
+-- search recipes by name only
+SELECT name AS results
+FROM recipes
+WHERE name LIKE '%ke%'
+	
 
--- search recipie by name
-SELECT recipes.name AS results
+-- search ingredients by name
+SELECT ingredients.name AS results
 FROM ingredients 
 WHERE name LIKE '%mæ%'
 
 
--- search recipie by name only
-SELECT name AS results
-FROM recipies
-WHERE name LIKE '%ke%'
-	
-
--- sort recipies by number of ingredients we have
+-- sort recipes by number of ingredients we have
 WITH available_ingredients AS (
     SELECT fridgeingredients. ingredient
     FROM fridgeingredients
