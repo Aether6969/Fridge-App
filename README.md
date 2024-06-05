@@ -22,7 +22,7 @@ TODO: ER diagram here or elsewhere in project?
 
 # COMPILE AND RUN
 
-## In Visual Studio 2022 with ASP.NET installed
+## In Visual Studio 2022 with ASP.NET and NpgSql installed
 
 1) Open FridgeApp.sln
 2) Change run configuration from https to http (this will avoid installing certificates)
@@ -30,6 +30,7 @@ TODO: ER diagram here or elsewhere in project?
 4) Wait a bit and Fridge App should open in your default browser
 
 If ASP.NET is not installed, open the Visual Studio Installer, press _Modify_, check the _ASP.NET and web development_ checkbox and press _Modify_ to start installation.
+NpgSql PostgreSQL can be installed through the extension manager.
 
 ## In Visual Studio Code with C# Dev Kit installed
 
