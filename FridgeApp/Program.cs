@@ -22,4 +22,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+FridgeApp.Sql.SetupTables();
+
 app.Run();

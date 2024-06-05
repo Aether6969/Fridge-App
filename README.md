@@ -1,23 +1,23 @@
 # DATABASE SETUP
-The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder and run the following commands to setup the database for the app:
+The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder. The following command connects to PostgreSQL and creates a database called _g64_ and a user called _g64_user_:
 
-    psql -h localhost -d <database_name> -U <database_username> < create_db.sql 
-    psql -h localhost -d <database_name> -U <database_username> < load_db.sql 
+    psql -h localhost -d postgres -U <database_username> < create_db.sql 
 
-_database_name_ is the name of the database where the tables are to be added. This could be dis2024_g64. 
+_database_username_ is the name of the user that you want to use to edit the database. The command assumes that the postgres database exists in the system.
 
-_database_username_ is the name of the user that you want to use to edit the database.
+When the app starts up, it will use the scripts _create_tables.sql_ and _load_db.sql_ to create and populate the tables in the database. These can be run manually:
 
-The create_db script creates a superuser called g64_user that is used by the app.
+    psql -h localhost -d g64 -U <database_username> < create_tables.sql 
+    psql -h localhost -d g64 -U <database_username> < load_db.sql 
 
-In order to clean up the database after use, run the drop_sql script:
+In order to clean up the database after use, run the drop_db.sql script:
 
-    psql -h localhost -d <database_name> -U <database_username> < create_db.sql 
+    psql -h localhost -d postgres -U <database_username> < drop_db.sql 
 
+This script can fail if something is still connected to the database, but it will tell you of any failure. In this case, open pgAdmin and delete the database and user manually.
 Depending on your setup, each call into psql may require entering the password for the database user.
 
 TODO: Should the create and load scripts be merged?
-TODO: Do we add the user in the sql script?
 TODO: ER diagram here or elsewhere in project?
 
 # COMPILE AND RUN

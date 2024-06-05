@@ -1,23 +1,17 @@
--- search recipie by name
-SELECT iname AS results
+
+-- search recipes by name only
+SELECT name AS results
+FROM recipes
+WHERE name LIKE '%ke%'
+	
+
+-- search ingredients by name
+SELECT ingredients.name AS results
 FROM ingredients 
-WHERE iname LIKE '_iquery%'
+WHERE name LIKE '%mæ%'
 
--- search recipie by name only
-SELECT rname AS results
-FROM recipies
-WHERE name LIKE '_rquery%'
 
--- search recipie by type and name (recipietypequery as set of all types default, rquery as empty string as default)
-select rname AS results
-FROM recipies 
-WHERE (recipietype IN recipietypequery) AND name LIKE '_rquery%'
-
--- gives sum of search result
-SELECT SUM(results)
-FROM NESTEDQUERY
-
--- sort recipies by number of ingredients we have
+-- sort recipes by number of ingredients we have
 WITH available_ingredients AS (
     SELECT fridgeingredients. ingredient
     FROM fridgeingredients

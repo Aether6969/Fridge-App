@@ -7,7 +7,7 @@
 -- Load and build in the same order as the tables were
 -- initialized so the state is consistent
 --
--- psql -h localhost -d dbname -U username < load_db.sql
+-- psql -h localhost -d g64 -U username < load_db.sql
 --
 -- Note the use of \COPY in place of COPY in the script to
 -- be able to actually load data from the csv file.
@@ -15,6 +15,7 @@
 BEGIN TRANSACTION; -- build ingredients and recipies
 	-- TODO: Temp until we load from the correct source 
 	\COPY ingredients FROM './tempIngredients.csv' DELIMITER ',' CSV HEADER;
+	--\COPY ingredients FROM './tempIngredients.csv' DELIMITER ',' CSV HEADER;
 	--\COPY ingredients FROM '../ArlaRecipeScraper/Data/Ingrediants.csv' 
 	--DELIMITER ',' CSV HEADER;
 	--\COPY recipes FROM '../ArlaRecipeScraper/Data/Recipes.csv' 
