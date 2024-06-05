@@ -32,25 +32,32 @@ namespace FridgeApp
             {
                 Console.WriteLine("Failed to query table in database, loading all tables ...");
 
-                NpgsqlConnection conn = new NpgsqlConnection(ConnectionString);
+                try
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection(ConnectionString);
 
-                // database tables not set up correctly, so setup tables
-                FileInfo create_tables_file = new FileInfo("../Scripts/create_tables.sql");
-                string create_tables_script = create_tables_file.OpenText().ReadToEnd();
-                var create_tables_cmd = new NpgsqlCommand(create_tables_script, conn);
-                conn.Open();
-                create_tables_cmd.ExecuteNonQuery();
-                conn.Close();
+                    // database tables not set up correctly, so setup tables
+                    FileInfo create_tables_file = new FileInfo("../Scripts/create_tables.sql");
+                    string create_tables_script = create_tables_file.OpenText().ReadToEnd();
+                    var create_tables_cmd = new NpgsqlCommand(create_tables_script, conn);
+                    conn.Open();
+                    create_tables_cmd.ExecuteNonQuery();
+                    conn.Close();
 
-                FileInfo load_db_file = new FileInfo("../Scripts/load_db.sql");
-                StringBuilder load_db_script = new StringBuilder(load_db_file.OpenText().ReadToEnd());
-                load_db_script.Replace("\\", "");
-                string currentDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
-                load_db_script.Replace("./", currentDir);
-                var load_db_cmd = new NpgsqlCommand(load_db_script.ToString(), conn);
-                conn.Open();
-                load_db_cmd.ExecuteNonQuery();
-                conn.Close();
+                    FileInfo load_db_file = new FileInfo("../Scripts/load_db.sql");
+                    StringBuilder load_db_script = new StringBuilder(load_db_file.OpenText().ReadToEnd());
+                    load_db_script.Replace("\\", "");
+                    string currentDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
+                    load_db_script.Replace("./", currentDir);
+                    var load_db_cmd = new NpgsqlCommand(load_db_script.ToString(), conn);
+                    conn.Open();
+                    load_db_cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine($"Failed to load database {ConnectionString}");
+                }
             }           
         }
     }
