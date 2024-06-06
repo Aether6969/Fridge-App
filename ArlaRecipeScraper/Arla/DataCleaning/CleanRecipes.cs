@@ -19,7 +19,7 @@ namespace RecipeWebScraper.Arla
 
                 int totalTimeMin = ParseTotalTimeMin(recipe.TotalTimeMin);
 
-                bool isFreezable = recipe.IsFreezable == "true";
+                bool isFreezable = recipe.IsFreezable == "True";
 
                 Regex numberRegex = new Regex(@"[0-9]+", RegexOptions.Compiled);
                 int rating = int.Parse(numberRegex.Match(recipe.Rating).Value);
@@ -126,28 +126,28 @@ namespace RecipeWebScraper.Arla
         }
         private static RecipeType ParseRecipeType(string s)
         {
-            Regex firstwordRegex = new Regex(@"^[a-zA-Z]*", RegexOptions.Compiled);
+            Regex firstwordRegex = new Regex(@"^[a-zA-Z]{2}", RegexOptions.Compiled);
             string firstword = firstwordRegex.Match(s).Value;
-
+            
             switch (firstword)
             {
-                case "Hovedret":
+                case "Ho":
                     return RecipeType.Hovedret;
-                case "Dessert":
+                case "De":
                     return RecipeType.Dessert;
-                case "Tilbehør":
-                    return RecipeType.Tilbehør;
-                case "Mellemmåltid":
-                    return RecipeType.Mellemmåltid;
-                case "Frokost":
+                case "Ti":
+                    return RecipeType.Tilbehoer;
+                case "Me":
+                    return RecipeType.Mellemmaaltid;
+                case "Fr":
                     return RecipeType.Frokost;
-                case "Forret":
+                case "Fo":
                     return RecipeType.Forret;
-                case "Madpakke":
+                case "Ma":
                     return RecipeType.Madpakke;
-                case "Morgenmad":
+                case "Mo":
                     return RecipeType.Morgenmad;
-                case "Ost":
+                case "Os":
                     return RecipeType.Ost;
                 default:
                     return RecipeType.Unknown;
