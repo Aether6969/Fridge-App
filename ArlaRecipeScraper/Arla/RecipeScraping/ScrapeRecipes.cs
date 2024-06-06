@@ -46,7 +46,6 @@ namespace RecipeWebScraper.Arla
             bool isFreezable = ElementExists(driver, By.XPath(xPathFr));
             string IsFreezable = isFreezable.ToString();
 
-            string xPathRat = "/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[2]/div/div/div/div/div[2]";
             IWebElement ratingElement = driver.FindElement(By.ClassName("c-rating-static__selected"));
             string Rating = ratingElement.GetAttribute("style");
 

@@ -16,9 +16,7 @@ namespace RecipeWebScraper.Arla
                 foreach (RecipeSurrogate recipe in rawRecpies)
                 {
                     string s =
-                        $"""
-                        "{recipe.Name}","{recipe.Link}","{recipe.RecipeType}","{recipe.TotalTimeMin}","{recipe.IsFreezable}","{recipe.Rating}","{recipe.ImageLink}","{recipe.IngrediantsAmount}",
-                        """;
+                        $"{recipe.Name},{recipe.Link},{recipe.RecipeType},{recipe.TotalTimeMin},{recipe.IsFreezable},{recipe.Rating},{recipe.ImageLink},{recipe.IngrediantsAmount},";
                     sw.WriteLine(s);
                 }
             }
