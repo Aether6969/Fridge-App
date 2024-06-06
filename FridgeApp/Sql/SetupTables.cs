@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Text;
 
 namespace FridgeApp
@@ -14,14 +15,16 @@ namespace FridgeApp
             bool success = false;
             try
             {
-                NpgsqlConnection conn = new NpgsqlConnection(ConnectionString);
-
-                var query = new NpgsqlCommand("SELECT * FROM users", conn);
-                conn.Open();
-                var reader = query.ExecuteReader();
-                success = reader.HasRows;
-                reader.Close();
-                conn.Close();
+                using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (NpgsqlCommand query = new NpgsqlCommand("SELECT * FROM users", conn))
+                    using (NpgsqlDataReader reader = query.ExecuteReader())
+                    {
+                        success = reader.HasRows;
+                        Console.WriteLine("Verified access to database.");
+                    }
+                }
             }
             catch (Exception)
             {
@@ -31,28 +34,36 @@ namespace FridgeApp
             if (!success)
             {
                 Console.WriteLine("Failed to query table in database, loading all tables ...");
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
 
                 try
                 {
-                    NpgsqlConnection conn = new NpgsqlConnection(ConnectionString);
+                    using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+                    {
+                        // database tables not set up correctly, so setup tables
+                        FileInfo createTablesFile = new FileInfo("../Scripts/create_tables.sql");
+                        string createTablesScript = createTablesFile.OpenText().ReadToEnd();
+                        NpgsqlCommand createTablesCmd = new NpgsqlCommand(createTablesScript, conn);
+                        conn.Open();
+                        createTablesCmd.ExecuteNonQuery();
+                        conn.Close();
 
-                    // database tables not set up correctly, so setup tables
-                    FileInfo create_tables_file = new FileInfo("../Scripts/create_tables.sql");
-                    string create_tables_script = create_tables_file.OpenText().ReadToEnd();
-                    var create_tables_cmd = new NpgsqlCommand(create_tables_script, conn);
-                    conn.Open();
-                    create_tables_cmd.ExecuteNonQuery();
-                    conn.Close();
-
-                    FileInfo load_db_file = new FileInfo("../Scripts/load_db.sql");
-                    StringBuilder load_db_script = new StringBuilder(load_db_file.OpenText().ReadToEnd());
-                    load_db_script.Replace("\\", "");
-                    string currentDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
-                    load_db_script.Replace("./", currentDir);
-                    var load_db_cmd = new NpgsqlCommand(load_db_script.ToString(), conn);
-                    conn.Open();
-                    load_db_cmd.ExecuteNonQuery();
-                    conn.Close();
+                        // Using COPY in sql to load tables form files is ... not very well
+                        // designed, so jumping through the hoops to make it work.
+                        FileInfo loadDbFile = new FileInfo("../Scripts/load_db.sql");
+                        StringBuilder loadDbScript = new StringBuilder(loadDbFile.OpenText().ReadToEnd());
+                        loadDbScript.Replace("\\", "");
+                        // TODO: Update when recipe data is available
+                        string currentDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
+                        loadDbScript.Replace("./", currentDir);
+                        NpgsqlCommand loadDbCmd = new NpgsqlCommand(loadDbScript.ToString(), conn);
+                        conn.Open();
+                        loadDbCmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    sw.Stop();
+                    Console.WriteLine("Database loaded in {0}", sw.Elapsed);
                 }
                 catch (Exception)
                 {
