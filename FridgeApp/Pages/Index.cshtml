@@ -1,7 +1,9 @@
 ﻿@page
 @model IndexModel
+@using YourNamespace.Pages;
 @{
-    ViewData["Title"] = "Home page";
+    var searchModel = new SearchModel();
+    List<string> apeList = new List<string> { "ape", "monkey" };
 }
 
 <div class="text-center">
@@ -17,7 +19,14 @@
                 <div class="search-container-ingredients text-center">
                     <h1 class="text-center mt-5">Fridge</h1>
                     <h2 class="text-center mt-5">Add Ingredients</h2>
-                    <input class="text-center" type="text" id="searchInput" placeholder="Search...">
+                    <form method="post">
+                        <input type="text" name="searchModel.SearchTerm" value="@searchModel.SearchTerm">
+                        <button type="submit" name="action" value="search">Search</button>
+                    </form>
+                    <div id="dropdownContainer">
+
+                    </div>
+                    
                 </div>
                 <div class="saved-ingredients">
                     <h2 class="text-center mt-5">Saved Ingredients</h2>
@@ -81,3 +90,26 @@
         margin: 0 auto;
     }
 </style>
+@if (Request.Method == "POST" && Request.Form["action"] == "search")
+{
+    searchModel.SearchTerm = Request.Form["searchModel.SearchTerm"].ToString();
+    searchModel.OnSearch(); 
+    <script>
+        // Create a new select element
+        var dropdown = document.createElement("select");
+
+        // Loop through the filtered items and create option elements
+        @foreach(string ingredient in searchModel.FilteredItems)
+        {
+            <text>
+                var option = document.createElement("option");
+                option.value = "@ingredient"; // Set the value attribute
+                option.textContent = "@ingredient"; // Set the visible text
+                dropdown.appendChild(option); // Append the option to the select element
+            </text>
+        }
+
+        // Append the select element to the container
+        document.getElementById("dropdownContainer").appendChild(dropdown);
+    </script>
+}
