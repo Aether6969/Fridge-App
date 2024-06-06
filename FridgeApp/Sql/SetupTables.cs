@@ -53,10 +53,11 @@ namespace FridgeApp
                         // designed, so jumping through the hoops to make it work.
                         FileInfo loadDbFile = new FileInfo("../Scripts/load_db.sql");
                         StringBuilder loadDbScript = new StringBuilder(loadDbFile.OpenText().ReadToEnd());
-                        loadDbScript.Replace("\\", "");
-                        // TODO: Update when recipe data is available
-                        string currentDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
-                        loadDbScript.Replace("./", currentDir);
+                        loadDbScript.Replace("\\COPY", "COPY");
+                        string dataDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\ArlaRecipeScraper\\Data\\";
+                        loadDbScript.Replace("../ArlaRecipeScraper/Data/", dataDir);
+                        string scriptDir = System.IO.Directory.GetCurrentDirectory() + "\\..\\Scripts\\";
+                        loadDbScript.Replace("./", scriptDir);
                         NpgsqlCommand loadDbCmd = new NpgsqlCommand(loadDbScript.ToString(), conn);
                         conn.Open();
                         loadDbCmd.ExecuteNonQuery();
