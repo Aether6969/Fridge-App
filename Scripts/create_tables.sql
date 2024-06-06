@@ -21,7 +21,7 @@ CREATE TABLE ingredients(
 CREATE TABLE recipes(
     name TEXT,
     link TEXT,
-    recipeType VARCHAR(10),
+    recipeType VARCHAR(15),
     totalTimeMin INT,
     isFreezable BOOL,
     rating INT,
@@ -30,13 +30,16 @@ CREATE TABLE recipes(
 );
 
 CREATE TABLE recipeIngredients(
+    id BIGSERIAL NOT NULL, -- because recipe,ingredient,amount,unit are not guarenteed to be unique
     recipe TEXT,
     ingredient TEXT,
     amount REAL,
-    unit VARCHAR(7),
-    PRIMARY KEY (recipe, ingredient),
-    FOREIGN KEY(recipe) REFERENCES recipes(name) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
+    unit TEXT,
+    PRIMARY KEY (id),
+    FOREIGN KEY(recipe) REFERENCES recipes(name) ON DELETE CASCADE ON UPDATE CASCADE
+    -- The ingredients are a mess in the dataset. Without a significant cleaning
+    -- effort, a foreign key on ingredients is not feasible.
+    --FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE users(
@@ -63,6 +66,8 @@ CREATE TABLE fridgeIngredients(
     amount REAL,
     unit VARCHAR(7),
     PRIMARY KEY (fridge, ingredient),
-    FOREIGN KEY(fridge) REFERENCES fridges(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(fridge) REFERENCES fridges(id) ON DELETE CASCADE ON UPDATE CASCADE
+    -- The ingredients are a mess in the dataset. Without a significant cleaning
+    -- effort, a foreign key on ingredients is not feasible.
+    --FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
