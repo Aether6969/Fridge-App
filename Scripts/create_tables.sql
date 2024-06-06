@@ -1,8 +1,7 @@
 -- Creates the database, tables and the user for the app
 -- Load tables using load_db.sql
--- Delete using drop_db.sql
 --
--- psql -h localhost -d g64 -U username < create_db.sql
+-- psql -h localhost -d g64 -U username < create_tables.sql
 --
 
 -- Clear existing tables if any
@@ -36,8 +35,8 @@ CREATE TABLE recipeIngredients(
     amount REAL,
     unit VARCHAR(7),
     PRIMARY KEY (recipe, ingredient),
-    FOREIGN KEY(recipe) REFERENCES recipes(name),
-    FOREIGN KEY(ingredient) REFERENCES ingredients(name)
+    FOREIGN KEY(recipe) REFERENCES recipes(name) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE users(
@@ -55,7 +54,7 @@ CREATE TABLE fridges(
     owner TEXT,
     name TEXT, -- display name
     PRIMARY KEY (id),
-    FOREIGN KEY(owner) REFERENCES users(name)
+    FOREIGN KEY(owner) REFERENCES users(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE fridgeIngredients(
@@ -64,6 +63,6 @@ CREATE TABLE fridgeIngredients(
     amount REAL,
     unit VARCHAR(7),
     PRIMARY KEY (fridge, ingredient),
-    FOREIGN KEY(fridge) REFERENCES fridges(id),
-    FOREIGN KEY(ingredient) REFERENCES ingredients(name)
+    FOREIGN KEY(fridge) REFERENCES fridges(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
