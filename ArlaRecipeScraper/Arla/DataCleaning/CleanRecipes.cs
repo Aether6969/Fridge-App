@@ -49,7 +49,7 @@ namespace RecipeWebScraper.Arla
 
                     double amount = int.Parse(numberRegex.Match(v).Value) + GetRealFromVoulgarFReac(frac);
 
-                    Regex unitRegex = new Regex(@"[\d ]*", RegexOptions.Compiled);
+                    Regex unitRegex = new Regex(@"[\d ¼½¾⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞]*", RegexOptions.Compiled);
                     string unit = unitRegex.Replace(ingAmount, "");
                     if (unit == string.Empty)
                     {
@@ -124,7 +124,6 @@ namespace RecipeWebScraper.Arla
                     return 0;
             }
         }
-
         private static RecipeType ParseRecipeType(string s)
         {
             Regex firstwordRegex = new Regex(@"^[a-zA-Z]*", RegexOptions.Compiled);
