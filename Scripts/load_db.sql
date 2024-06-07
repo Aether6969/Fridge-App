@@ -13,15 +13,15 @@
 -- be able to actually load data from the csv file.
 --
 BEGIN TRANSACTION; -- build ingredients and recipies
-	-- TODO: Temp until we load from the correct source 
+	-- Temp until we load from the correct source 
 	--\COPY ingredients FROM './tempIngredients.csv' DELIMITER ',' CSV HEADER;
-	\COPY ingredients FROM '../ArlaRecipeScraper/Data/uniqueIngredients.csv' DELIMITER ',' CSV HEADER;
-	\COPY recipes FROM '../ArlaRecipeScraper/Data/CleanRecipes.csv' DELIMITER ',' CSV HEADER;
-	\COPY recipeIngredients(recipe,ingredient,amount,unit) FROM '../ArlaRecipeScraper/Data/CleanRecipeIngrediants.csv' DELIMITER ',' CSV HEADER;
+	\COPY ingredients FROM '../ArlaRecipeScraper/Data/uniqueIngredients.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
+	\COPY recipes FROM '../ArlaRecipeScraper/Data/CleanRecipes.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
+	\COPY recipeIngredients(recipe,ingredient,amount,unit) FROM '../ArlaRecipeScraper/Data/CleanRecipeIngrediants.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
 COMMIT;
 
 BEGIN TRANSACTION; -- load users, fridges and contents in fridges
-	\COPY users FROM './users.csv' DELIMITER ',' CSV HEADER;
-	\COPY fridges FROM './fridges.csv' DELIMITER ',' CSV HEADER;
-	\COPY fridgeIngredients FROM './fridgeIngredients.csv' DELIMITER ',' CSV HEADER;
+	\COPY users FROM './users.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
+	\COPY fridges FROM './fridges.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
+	\COPY fridgeIngredients FROM './fridgeIngredients.csv' WITH NULL AS E'\'\'' DELIMITER ',' CSV HEADER;
 COMMIT;

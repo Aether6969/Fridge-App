@@ -20,12 +20,12 @@ CREATE TABLE ingredients(
 
 CREATE TABLE recipes(
     name TEXT,
-    link TEXT,
+    link TEXT DEFAULT '' NOT NULL,
     recipeType VARCHAR(15),
     totalTimeMin INT,
     isFreezable BOOL,
     rating INT,
-    imageLink TEXT,
+    imageLink TEXT DEFAULT '' NOT NULL,
     PRIMARY KEY (name)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE recipeIngredients(
     recipe TEXT,
     ingredient TEXT,
     amount REAL,
-    unit TEXT,
+    unit TEXT DEFAULT '' NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY(recipe) REFERENCES recipes(name) ON DELETE CASCADE ON UPDATE CASCADE
     -- The ingredients are a mess in the dataset. Without a significant cleaning
@@ -64,7 +64,7 @@ CREATE TABLE fridgeIngredients(
     fridge INT,
     ingredient TEXT,
     amount REAL,
-    unit VARCHAR(7),
+    unit TEXT DEFAULT '' NOT NULL,
     PRIMARY KEY (fridge, ingredient),
     FOREIGN KEY(fridge) REFERENCES fridges(id) ON DELETE CASCADE ON UPDATE CASCADE
     -- The ingredients are a mess in the dataset. Without a significant cleaning
