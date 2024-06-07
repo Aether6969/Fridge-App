@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-FridgeApp.Sql.SetupTables();
+FrigeCore.Server.Server.SetupTables();
 
 app.Run();

@@ -1,6 +1,5 @@
 ﻿@page
 @model IndexModel
-@using YourNamespace.Pages;
 
 <div class="text-center">
     <h1 class="display-4">Fridge App</h1>
@@ -27,7 +26,6 @@
                 </div>
                 <div class="saved-ingredients">
                     <h2 class="text-center mt-5">Saved Ingredients</h2>
-                    @Html.Raw(Model.IngredientSavedContent)
                     @Html.Raw(Model.UserIngredientSavedContent)
                 </div>
             </div>
