@@ -1,8 +1,4 @@
-ingredient
-kammuslinger
-ris
-pasta
-ost
+name
 A38 med hindbær
 A38 naturel
 Abrikosmarmelade
@@ -15,8 +11,11 @@ Acai pulver
 Æg
 Æggeblomme
 Æggehvide
+Ægnudler
 Ænder
+Ærter
 Ærteskud
+Agerhønd
 Agurk
 Ahornsirup
 Ajvar relish
@@ -37,7 +36,6 @@ Ansjosfileter
 Appelsin
 Appelsinjuice
 Appelsinlikør
-Emmentaler
 Artiskokhjerter
 Asielage
 Aspargeskartofler
@@ -49,8 +47,6 @@ Babysalatblade
 Babyspinatblade
 Bacon
 Bacontern
-Limefrugter
-Ærter
 Bær
 Bagekartoffel
 Bagels
@@ -71,30 +67,21 @@ Beaumes de venise Muscat
 Belgiske vafler
 Bellis/tusindfryd
 Belugalinser
-Sild
 Birkes
 Biscotti
 Blå birkes
-Spirulina pulver
 Blå stenfri vindruer
 Blåbær
 Blåbærstøv
 Bladselleri
 Blækspruttefarve
 Blåskimmelost
-Pistacienødder
-Timian
-Gedeost
-Nougat
-Hytteost
 Blodappelsin
-Dadler
 Blomkål
 Blommer
 Blommetomater
 Blomster
 Blomsterkarse
-Kronhjortemørbrader
 Bøftomater
 Boghvedeflager
 Boghvedegryn
@@ -107,7 +94,7 @@ Bønnespirer
 Borlottibønner
 Bourgogne rødvin
 Brændenælder
-Ægnudler
+Brændenældeskud
 Bresaola
 Brie
 Broccoli
@@ -133,6 +120,7 @@ Cantaloupemelon
 Cashewnødder
 Cayennepeber
 Champagne
+Champignon 
 Champignoner
 Chateaubriand
 Cheasy
@@ -179,11 +167,13 @@ Cote de boeuf
 Couscousgryn
 Creme fraiche
 Croutoner
+Dadler
 Danskvand
 Digestive kiks
 Dijon-honningsennep
 Dijonnaise
 Dijonsennep
+Dild
 Dilddressing rævesovs
 Dildfrø
 Dildkrone
@@ -194,11 +184,13 @@ Drue agurker
 Dukkah
 Dulce de leche
 Durumbrød
+Durummel
 Dyrebov i tern fx kronhjort
 Dyrefilet fx dådyr
 Dyreryg ca. 2 kg
 Edamamebønner
 Eddike
+Emmentaler
 Engelsk sauce
 Enokisvampe
 Espressokaffe
@@ -206,53 +198,38 @@ Estragonblade
 Falafler
 Fed hvidløg
 Feldsalat
-Fennikeltop
 Fennikel
 Fennikelfrø
-Laks
+Fennikeltop
 Fersken
 Figenpålæg
 Filodej
-Fiskebouillon
-Grøntsagsbouillon
 Fiskeben
 Fiskeboller
-Sej
-Rødspætte
-Skrubbe
-Isling
-Rødtunge
+Fiskebouillon
 Fiskefrikadeller
 Fiskesauce
 Fjæsing
 Fladbrød
 Flæskesteg
-Havtaskehale
 Flagesalt
 Flanksteak
 Flødeboller
 Flødekarameller
 Flødelikør
+Flødeost
 Flødeskum
-Jordbær
+Flormelis
 Flute
 Flydende honning
 Flyvefiskerogn
 Fødselsdagsflag
 Fødselsdagslys
 Forårsløg
-Pizzabunde
 Formfranskbrød
-Flødeost
-Champignon 
-Kejserhat
-Østershat
 Fraiche
 Franskbrød
 Fritureolie
-Durummel
-Ølandshvede
-Ølandshvedemel
 Fuldkornscouscous
 Fuldkornsdurummel
 Fuldkornshvedemel
@@ -268,6 +245,7 @@ Galliano
 Garam masala
 Gås
 Gåsefedt
+Gedeost
 Gin
 Glaskål
 Glasnudler
@@ -298,18 +276,19 @@ Griseslag
 Grissini
 Grødris
 Grøn chilipeber
-Grøn spidskål
-Lilla spidskål
 Grøn pastafarve
 Grøn peberfrugt
 Grøn salat
+Grøn spidskål
 Grøn squash
 Grønkål
 Grønkålsblade
+Grønne linser
 Grønne oliven
 Grønne squash
-Grønne vindruer
 Grønne tomater
+Grønne vindruer
+Grøntsagsbouillon
 Grov bulgur
 Grov peanutbutter
 Grov sennep
@@ -317,9 +296,9 @@ Grovboller
 Grovbrød
 Grove burgerboller
 Grovvalsede havregryn
+Gul
 Gul pastafarve
 Gul peberfrugt
-Gul
 Guldstøv
 Gule flækærter
 Gule sennepsfrø
@@ -342,6 +321,7 @@ Havregryn
 Havrekiks
 Havsalt
 Havtaskefilet
+Havtaskehale
 Havtaskekæber
 Havtornsaft
 Havtornsyltetøj
@@ -385,8 +365,10 @@ Hybenmarmelade
 Hybenroseblade
 Hyldeblomsteddike
 Hyldeblomstskærm
+Hytteost
 Icebergsalat
 Ingefærmarmelade
+Isling
 Isvafler
 Italiensk brød
 Italiensk flute
@@ -394,6 +376,7 @@ Japansk riseddike
 Japansk sojasauce
 Jasminris
 Jomfruolivenolie
+Jordbær
 Jordbær sirup
 Jordbærblade
 Jordbærmarmelade
@@ -427,6 +410,7 @@ Kalvekoteletter
 Kalvelever
 Kalveskank
 Kammerjunkere
+kammuslinger
 Kammuslinger
 Kanelstænger
 Kanelstang
@@ -441,10 +425,11 @@ Karrysauce
 Karrysuppe
 Karse
 Kartoffel
-Kartolfer
 Kartoffelmel
+Kartolfer
 Kaviar
 Kefir
+Kejserhat
 Kidneybønner
 Kikærtemel
 Kikærter
@@ -474,7 +459,7 @@ Kørvelkviste
 Krabbekød
 Krebsehaler
 Krølsalat
-Mælkebøtter
+Kronhjortemørbrader
 Kruspersille
 Kryddersalt
 Krymmel
@@ -482,7 +467,6 @@ Kullerfileter
 Kulør
 Kumquats
 Kvark
-Løvstikke
 Kylling
 Kyllingebrystfileter
 Kyllingefilet
@@ -497,6 +481,7 @@ Ladyfingers
 Lagereddike
 Lagkagebunde
 Lakridssnørrebånd
+Laks
 Laksefilet
 Lakserogn
 Lakseside
@@ -522,12 +507,15 @@ Laurbærblade
 Lemon curd
 Lever fx kalvelever
 Likør
+Lilla spidskål
 Limeblade
 Limefrugt
+Limefrugter
 Linsepasta
 Løg
 Løgspirer
 Lomo
+Løvstikke
 Lucernespirer
 Macademianødder
 Madagaskarpeberkorn
@@ -535,6 +523,7 @@ Madeira
 Madlavningsfløde
 Madras karry
 Mælk
+Mælkebøtter
 Mælkechokolade
 Mælkesauce
 Majs
@@ -586,6 +575,7 @@ Nektariner
 Nigellafrø
 Nøddekurve
 Noritang
+Nougat
 Nutella
 Oksebøf
 Oksebouillon
@@ -598,6 +588,8 @@ Oksemørbrad
 Oksemørbradbøffer
 Oksesmåkød
 Oksetykkam
+Ølandshvede
+Ølandshvedemel
 Olie
 Oliven
 Olivenolie
@@ -606,9 +598,11 @@ Orange peberfrugt
 Orangeblomstvand
 Oreganoblade
 Orientalsk karry
-Ørredrogn
 Ørreder
+Ørredrogn
+ost
 Østers
+Østershat
 Østerssauce
 Ostesauce
 Overtræksmarcipan
@@ -625,6 +619,7 @@ Paprika
 Parmaskinke
 Parmigiano Reggiano
 Passionsfrugter
+pasta
 Pastafarve
 Pastinakker
 Peanutbutter
@@ -646,8 +641,10 @@ Pighvarrer
 Pilsnerøl
 Pinjekerner
 Piskefløde
+Pistacienødder
 Pitabrød
 Pizza sauce
+Pizzabunde
 Pizzadej
 Pizzamel
 Polenta
@@ -658,6 +655,7 @@ Portobello svampe
 Portvin
 Potaske
 Poussiner
+Ppeltmel
 Pumpernikkel
 Purløg
 Quinoa
@@ -676,6 +674,7 @@ Ribbensteg
 Ribeye-steak
 Ribs
 Ribsgelé
+ris
 Ris
 Risalamande
 Rismel
@@ -706,7 +705,9 @@ Rødkål
 Rødkitost
 Rødløg
 Rødløgsmarmelade
+Rødspætte
 Rødspættefileter
+Rødtunge
 Rødtungefileter
 Rødvin
 Rødvinseddike
@@ -725,6 +726,7 @@ Rugbrød
 Rugbrødschips
 Rugflager
 Rugkerner
+Rugkiks
 Rugmel
 Rygeost
 Safran
@@ -740,6 +742,7 @@ Sambal oelek
 Sandwichbrød
 Sardiner
 Savojkål
+Sej
 Sejfilet
 Sellerisalt
 Semidried tomater
@@ -754,8 +757,7 @@ Sherryeddike
 Shiitakesvampe
 Sigtebrød
 Sigtemel
-Flormelis
-Ppeltmel
+Sild
 Sirup
 Skæreost
 Skalotteløg
@@ -777,11 +779,10 @@ Skrællede æbler uden kernehus i kvarte
 Skrællede bagekartofler
 Skrællede bagekartofler i ½ cm skiver
 Skrællede bagekartofler i grove stykker ca. 500 g
+Skrubbe
 Skrubbefileter
 Skumfiduser
 Skvalderkål
-Brændenældeskud
-Dild
 Sky
 Skyr-yoghurt
 Slik
@@ -807,7 +808,6 @@ Sort quinoa
 Sort te
 Sorte bønner
 Sorte linser
-Grønne linser
 Sorte oliven
 Sorte ris
 Sorte sesamfrø
@@ -818,6 +818,7 @@ Speltflager
 Speltmel
 Spidskål
 Spinatblade
+Spirulina pulver
 Squash
 Squashblomster
 Stærk chilisauce
@@ -861,6 +862,7 @@ Te
 Teriyakisauce
 Thaisuppe
 Tikka masala kryddermix
+Timian
 Toastbrød
 Tomater
 Tomatketchup
@@ -888,9 +890,6 @@ Tyrkisk peber bolsjer
 Tyttebær
 Tyttebærsyltetøj
 Tzatziki
-Agerhønd
-Rugkiks
-Ymerdrys
 Vaffelrør
 Vagtelæg
 Valnøddekerner
@@ -918,4 +917,5 @@ Wienerpølser
 Wokstrimler
 Worcestershiresauce
 Ymer
+Ymerdrys
 Yoghurt
