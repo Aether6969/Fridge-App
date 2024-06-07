@@ -58,14 +58,32 @@ namespace FridgeApp.Pages
                 IngredientSearchContent += "</select>";
             }
             if(Request.Form.ContainsKey("addIngredients")){
-                AddTerm = Request.Form["selectedIngredient"].ToString();
-                Console.WriteLine("akdfh " + AddTerm);
-                // Create a new select element
-                IngredientSavedContent = "<select>";
+                if (Request.Form.ContainsKey("addIngredients"))
+                {
+                    AddTerm = Request.Form["selectedIngredient"].ToString();
+                    if (!UserIngredientSearchResults.Contains(AddTerm))
+                    {
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            FileInfo addIngredient = new FileInfo("../Scripts/addIngredient.sql");
+                            string addIngredientScript = addIngredient.OpenText().ReadToEnd();
+                            addIngredientScript = addIngredientScript.Replace("@ingredient", "'" + AddTerm + "'");
+                            addIngredientScript = addIngredientScript.Replace("@fridge", "3");
+                            using (NpgsqlCommand command = new NpgsqlCommand(addIngredientScript, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    UserIngredientSearchResults = GetFridgeIngrediants("Bilbo").Select((x) => x.Name).ToList();
+                    UserIngredientSavedContent = string.Empty;
+                    foreach (string ingredient in UserIngredientSearchResults)
+                    {
+                        UserIngredientSavedContent += "<p>" + ingredient + "</p>";
+                    }
+                }
 
-                IngredientSavedContent += $"<option value='{AddTerm}'>{AddTerm}</option>";
-
-                IngredientSavedContent += "</select>";
             }
         }
     }
