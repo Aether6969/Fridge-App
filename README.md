@@ -17,7 +17,12 @@ In order to clean up the database after use, run the drop_db.sql script:
 This script can fail if something is still connected to the database, but it will tell you of any failure. In this case, open pgAdmin and delete the database and user manually.
 Depending on your setup, each call into psql may require entering the password for the database user.
 
-TODO: Should the create and load scripts be merged?
+## Troubleshooting
+Some operating systems and some setups may differ. Typical issues:
+
+1) The streaming operator < does not work. Use -f instead.
+2) The tables are created but nothing is loaded into them. This is typically a rights issue: The database script does not have access to the folders containing the csv files. Please grant access to _/Scripts_ and _/Fridge-App/ArlaRecipeScraper/Data_.
+
 TODO: ER diagram here or elsewhere in project?
 
 # COMPILE AND RUN
