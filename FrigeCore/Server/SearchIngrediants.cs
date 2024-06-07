@@ -17,20 +17,20 @@ namespace FrigeCore.Server
             {
                 using (NpgsqlDataReader reader = searchCommand.ExecuteReader())
                 {
-                    List<Ingredient> IngredientSearchResults = new List<Ingredient>();
+                    List<Ingredient> ingredientSearchResults = new List<Ingredient>();
 
                     while (reader.Read())
                     {
                         Ingredient ingredient = new Ingredient()
                         {
                             Name = reader.GetString(0),
-                            Amount = reader.GetDouble(1),
-                            Unit = reader.GetString(2),
+                            Amount = 1000,
+                            Unit = " ",
                         };
-                        IngredientSearchResults.Add(ingredient);
+                        ingredientSearchResults.Add(ingredient);
                     }
-
-                    return IngredientSearchResults;
+                        Console.WriteLine("dkfjh "+ ingredientSearchResults.Count());
+                    return ingredientSearchResults;
                 }
             }
         }

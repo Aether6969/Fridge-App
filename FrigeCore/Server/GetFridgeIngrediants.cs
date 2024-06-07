@@ -28,7 +28,10 @@ namespace FrigeCore.Server
                     {
                         Ingredient ingredient = new Ingredient()
                         {
-
+                            
+                            Name=reader.GetString(1),
+                            Amount=1000,
+                            Unit=" ", 
                         };
 
                         UserIngredientSearchResults.Add(ingredient);

@@ -33,12 +33,7 @@ namespace FridgeApp.Pages
         public string UserIngredientSavedContent { get; set; } = string.Empty;
         public void OnGet()
         {
-            UserIngredientSearchResults = GetFridgeIngrediants("Bilbo").Select((x) => x.Name).ToList();
-            UserIngredientSavedContent = string.Empty;
-            foreach(string ingredient in  UserIngredientSearchResults)
-            {
-                UserIngredientSavedContent += "<p>" + ingredient + "</p>";
-            }
+            getfridge();
         }
         public void OnPost(){
             if (Request.Form.ContainsKey("submitIngredientSearch"))
@@ -76,14 +71,17 @@ namespace FridgeApp.Pages
                             }
                         }
                     }
-                    UserIngredientSearchResults = GetFridgeIngrediants("Bilbo").Select((x) => x.Name).ToList();
-                    UserIngredientSavedContent = string.Empty;
-                    foreach (string ingredient in UserIngredientSearchResults)
-                    {
-                        UserIngredientSavedContent += "<p>" + ingredient + "</p>";
-                    }
                 }
 
+            }                               
+            getfridge();
+        }
+        public void getfridge(){
+            UserIngredientSearchResults = GetFridgeIngrediants("Bombur").Select((x) => x.Name).ToList();
+            UserIngredientSavedContent = string.Empty;
+            foreach(string ingredient in  UserIngredientSearchResults)
+            {
+                UserIngredientSavedContent += "<p>" + ingredient + "</p>";
             }
         }
     }
