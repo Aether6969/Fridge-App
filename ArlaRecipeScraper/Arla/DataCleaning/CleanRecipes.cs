@@ -30,7 +30,7 @@ namespace RecipeWebScraper.Arla
 
                 //TODO: bad
                 string[] ingrediants = ingrediantRegex.Matches(recipe.IngrediantsAmount).Select((x) => x.Value).ToArray();
-                RecipeIngredient[] ingredeantsAmount = new RecipeIngredient[ingrediants.Length];
+                Ingredient[] ingredeantsAmount = new Ingredient[ingrediants.Length];
                 for (int i = 0; i < ingrediants.Length; i++)
                 {
                     string ingrediant = ingrediants[i];
@@ -56,7 +56,7 @@ namespace RecipeWebScraper.Arla
                         unit = "stk";
                     }
 
-                    ingredeantsAmount[i] = new RecipeIngredient()
+                    ingredeantsAmount[i] = new Ingredient()
                     {
                         Name = ingName,
                         Amount = amount,
@@ -82,8 +82,6 @@ namespace RecipeWebScraper.Arla
         {
             switch (frac)
             {
-                case "":
-                    return 0;
                 case "¼":
                     return 1.0 / 4.0;
                 case "½":
@@ -121,11 +119,12 @@ namespace RecipeWebScraper.Arla
                 case "⅞":
                     return 7.0 / 8.0;
                 default:
-                    return 0;
+                    return 0.0;
             }
         }
         private static RecipeType ParseRecipeType(string s)
         {
+            //TODO:
             Regex firstwordRegex = new Regex(@"^[a-zA-Z]{2}", RegexOptions.Compiled);
             string firstword = firstwordRegex.Match(s).Value;
             

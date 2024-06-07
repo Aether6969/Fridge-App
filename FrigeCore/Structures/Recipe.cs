@@ -9,6 +9,6 @@
         public bool IsFreezable;
         public int Rating;
         public string ImageLink;
-        public RecipeIngredient[] IngrediantsAmount;
+        public Ingredient[] IngrediantsAmount;
     }
 }

@@ -6,6 +6,8 @@ using static RecipeWebScraper.Arla.DataManegement;
 using static RecipeWebScraper.Arla.DataCleaning;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 internal class Program
 {
@@ -36,15 +38,15 @@ internal class Program
     private static void Main(string[] args)
     {
         bool scrapeRecipeLinks = false;
-        bool scrapeRecipes = true;
-        bool cleanRecipes = true;
+        bool scrapeRecipes = false;
+        bool cleanRecipes = false;
 
         if (scrapeRecipeLinks)
         {
             string[] links = ScrapeRecipeLinks(driver);
             SaveLinks(RecipeLinksPath, links);
         }
-
+        
         if (scrapeRecipes)
         {
             IEnumerable<string> links = LoadLinks(RecipeLinksPath);
@@ -58,9 +60,48 @@ internal class Program
         {
             IEnumerable<RecipeSurrogate> rawRecipes = LoadRawRecipesCSV(RawRecipesPath);
 
-            IEnumerable<Recipe> recipes = CleanRecipes(rawRecipes);
+            Recipe[] recipes = CleanRecipes(rawRecipes).ToArray();
+
+            SaveCleanRecipesCSV(CleanRecipesPath, recipes);
+            SaveCleanRecipeIngrediantsCSV(CleanIngrediantsPath, recipes);
         }
 
         Console.Beep();
     }
+
+    public static void SaveCleanRecipesCSV(string path, IEnumerable<Recipe> Recpies)
+    {
+        using (StreamWriter sw = new StreamWriter(path))
+        {
+            string header = $"Name,Link,RecipeType,TotalTimeMin,IsFreezable,Rating,ImageLink";
+            sw.WriteLine(header);
+
+            foreach (Recipe recipe in Recpies)
+            {
+                string s =
+                    $"{recipe.Name},{recipe.Link},{recipe.RecipeType},{recipe.TotalTimeMin},{recipe.IsFreezable},{recipe.Rating},{recipe.ImageLink}";
+                sw.WriteLine(s);
+            }
+        }
+    }
+    public static void SaveCleanRecipeIngrediantsCSV(string path, IEnumerable<Recipe> rawRecipes)
+    {
+        using (StreamWriter sw = new StreamWriter(path))
+        {
+            string header = $"Recipe,Name,Amount,Unit";
+            sw.WriteLine(header);
+
+            foreach (Recipe recipe in rawRecipes)
+            {
+                foreach (Ingredient ingrediant in recipe.IngrediantsAmount)
+                {
+                    //TODO: move to igrediant tostring
+                    string s =
+                        $"{recipe.Name},{ingrediant.Name},{ingrediant.Amount.ToString(System.Globalization.CultureInfo.InvariantCulture)},{ingrediant.Unit}";
+                    sw.WriteLine(s);
+                }
+            }
+        }
+    }
+
 }

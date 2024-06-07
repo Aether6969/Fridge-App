@@ -16,11 +16,7 @@
         private static readonly string CleanRecipesCSVFileName = "CleanRecipes.csv";
         public static readonly string CleanRecipesPath = Path.Combine(projectPath, DirName, CleanRecipesCSVFileName);
 
-        private static readonly string CleanRecipeIngrediantsCSVFileName = "CleanRecipeIngrediants.csv";
-        public static readonly string CleanRecipeIngrediantsPath = Path.Combine(projectPath, DirName, CleanRecipeIngrediantsCSVFileName);
-
-
-        private static readonly string IngrediantsFileName = "BilkaIngrediants.txt";
-        public static readonly string IngrediantsPath = Path.Combine(projectPath, DirName, IngrediantsFileName);
+        private static readonly string CleanIngrediantsCSVFileName = "CleanRecipeIngrediants.csv";
+        public static readonly string CleanIngrediantsPath = Path.Combine(projectPath, DirName, CleanIngrediantsCSVFileName);
     }
 }
