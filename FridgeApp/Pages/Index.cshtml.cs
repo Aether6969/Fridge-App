@@ -32,9 +32,38 @@ namespace FridgeApp.Pages
         {
             _logger = logger;
         }
+
+        public List<string> UserIngredientSearchResults { get; set; } = new List<string>();
+        public string UserIngredientSavedContent { get; set; } = string.Empty;
         public void OnGet()
         {
-            
+            string query = $"SELECT ingredient,amount,unit FROM fridgeIngredients" +
+                "\r\n\tinner join " +
+                "\r\n\t(SELECT id FROM fridges" +
+                "\r\n\t\tinner join users ON fridges.owner = users.name AND users.name = @username)" +
+                "\r\n\t\tAS userFridge" +
+                "\r\n\tON fridgeIngredients.fridge = userFridge.id;";
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.Add(new("username", "Bilbo"));
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        UserIngredientSearchResults = new List<string>();
+                        while (reader.Read())
+                        {
+                            UserIngredientSearchResults.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            UserIngredientSavedContent = string.Empty;
+            foreach(string ingredient in  UserIngredientSearchResults)
+            {
+                UserIngredientSavedContent += "<p>" + ingredient + "</p>";
+            }
         }
         public void OnPost(){
             if (Request.Form.ContainsKey("submitIngredientSearch"))
