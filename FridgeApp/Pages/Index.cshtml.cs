@@ -32,9 +32,12 @@ namespace FridgeApp.Pages
 
         public void OnGet()
         {
-            
+            Response.ContentType = "text/html;charset=UTF-8";
+            Request.ContentType = "text/html;charset=UTF-8";
         }
         public void OnPost(){
+            Response.ContentType = "text/html;charset=UTF-8";
+            Request.ContentType = "text/html;charset=UTF-8";
             if (Request.Form["submitIngredientSearch"] == "search")
                 {
                     SearchTerm = Request.Form["searchIngredient"].ToString();
