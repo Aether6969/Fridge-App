@@ -15,7 +15,7 @@
 BEGIN TRANSACTION; -- build ingredients and recipies
 	-- TODO: Temp until we load from the correct source 
 	--\COPY ingredients FROM './tempIngredients.csv' DELIMITER ',' CSV HEADER;
-	--\COPY ingredients FROM '../ArlaRecipeScraper/Data/Ingrediants.csv' DELIMITER ',' CSV HEADER;
+	\COPY ingredients FROM '../ArlaRecipeScraper/Data/uniqueIngredients.csv' DELIMITER ',' CSV HEADER;
 	\COPY recipes FROM '../ArlaRecipeScraper/Data/CleanRecipes.csv' DELIMITER ',' CSV HEADER;
 	\COPY recipeIngredients(recipe,ingredient,amount,unit) FROM '../ArlaRecipeScraper/Data/CleanRecipeIngrediants.csv' DELIMITER ',' CSV HEADER;
 COMMIT;
