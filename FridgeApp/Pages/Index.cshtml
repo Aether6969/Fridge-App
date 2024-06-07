@@ -17,15 +17,17 @@
                     <h2 class="text-center mt-5">Add Ingredients</h2>
                     <form method="post" enctype="multipart/form-data">
                         <input type="text" name="searchIngredient" value="@Model.SearchTerm">
-                        <button type="submit" name="submitIngredientSearch" value="search">Search</button>
-                    </form>
-                    <div id="dropdownContainer">
-                        @Html.Raw(Model.IngredientSearchContent)
-                    </div>
-                    
+                        <button type="submit" name="submitIngredientSearch">Search</button>
+                    </form>    
+                    @Html.Raw(Model.IngredientSearchContent)
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="selectedIngredient" name="selectedIngredient">
+                        <button type="submit" name="addIngredients" onclick="setSelectedIngredient()" >ADD</button>
+                    </form>            
                 </div>
                 <div class="saved-ingredients">
                     <h2 class="text-center mt-5">Saved Ingredients</h2>
+                    @Html.Raw(Model.IngredientSavedContent)
                 </div>
             </div>
         </div>
@@ -84,3 +86,10 @@
     }
 </style>
 
+<script>
+    function setSelectedIngredient() {
+        var selectElement = document.querySelector('select');
+        var selectedIngredient = selectElement.options[selectElement.selectedIndex].value;
+        document.getElementById('selectedIngredient').value = selectedIngredient;
+    }
+</script>
