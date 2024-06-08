@@ -24,7 +24,7 @@ namespace FridgeApp.Pages
         public string IngredientSavedContent {get;set;}= "<select>"+ "</select>";
         //available Recipes
         public List<Tuple<Recipe,int>> availableRecipes {get;set;}= new  List<Tuple<Recipe,int>> ();
-        public string availableRecipesContent{get;set;}= "<select>"+ "</select>";
+        public string availableRecipesContent{get;set;}= string.Empty;
 
         private readonly string connectionString = "Host=localhost;Port=5432;Database=g64;Username=g64_user;Password=g64_pwd_rule";
 
