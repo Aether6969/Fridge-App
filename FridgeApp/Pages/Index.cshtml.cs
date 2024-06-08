@@ -22,7 +22,7 @@ namespace FridgeApp.Pages
         public List<string> SavedIngredients {get;set;}= new List<string>();
         public string IngredientSavedContent {get;set;}= "<select>"+ "</select>";
         //available Recipes
-        public List<Tuple<string,int>> availableRecipes {get;set;}= new  List<Tuple<string,int>> ();
+        public List<Tuple<Recipe,int>> availableRecipes {get;set;}= new  List<Tuple<Recipe,int>> ();
         public string availableRecipesContent{get;set;}= "<select>"+ "</select>";
 
         private readonly string connectionString = "Host=localhost;Port=5432;Database=g64;Username=g64_user;Password=g64_pwd_rule";
@@ -62,10 +62,12 @@ namespace FridgeApp.Pages
                 addIngredients(AddTerm);
             }   
             if(Request.Form.ContainsKey("findRecipes")){
-                availableRecipes=findRecipes().Select((x) => Tuple.Create(x.Item1.Name,x.Item2)).ToList();
-                foreach(Tuple<string,int>  recipe in  availableRecipes)
+                availableRecipes=findRecipes().Select((x) => Tuple.Create(x.Item1,x.Item2)).ToList();
+                int recipesToShow = 3;
+                for(int i = 0; i < Math.Min(availableRecipes.Count,recipesToShow);i++)
                     {
-                        availableRecipesContent += "<p>" + recipe.Item1+ " | " + recipe.Item2 + "</p>";
+                    Tuple<Recipe, int> recipe = availableRecipes[i];
+                    availableRecipesContent += GetRecipeHtml(recipe.Item1, recipe.Item2);
                     }
             }                                
             getfridge();
@@ -99,5 +101,29 @@ namespace FridgeApp.Pages
             }
             UserIngredientSavedContent += "</table>";
         }
+
+        public string GetRecipeHtml(Recipe recipe, int fraction)
+        {
+            string result = string.Empty; ;
+            result = "<table class=\"recipes\">";
+            result += "<tr><td>" + recipe.TotalTimeMin + " MIN ";
+            if (recipe.IsFreezable)
+            {
+                result += "\n\nKAN FRYSES";
+            }
+            result += "</td>";
+            if (recipe.ImageLink != null && recipe.ImageLink != string.Empty)
+            {
+                result += "<td><img src=\"" + recipe.ImageLink + "\"/></td>";
+            }
+            result += "</tr><tr><td><a href=\"" + recipe.Link + "\">" + recipe.Name + "</a>\t Karakter: " + recipe.Rating + " af 100 </td></tr>";
+            result += "<tr><td> Du har " + fraction + "% af ingredienserne</td></tr>";
+            foreach (Ingredient ingredient in recipe.IngrediantsAmount)
+            {
+                result += "<tr><td>" + ingredient.Name + "</td></tr>";
+            }
+            result += "</table>";
+            return result;
+        }
+        }
     }
-}
