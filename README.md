@@ -15,7 +15,14 @@ Based on the ingrediants in your fridge if you press the search button (to the r
 
 # ER Diagram TODO:
 ![.ERDiagram.png](https://github.com/Aether6969/Fridge-App/blob/master/ERDiagram.png)
-er diag description
+
+As can be seen, the ER diagram consists of three "islands" that are isolated from each other. Originally, we had planned to let both fridgeIngredients and recipeIngredients have a relation to ingredients, but in order to make that work, we needed to put in significant post scraping work to do a propper mapping. As an example, _peber_, _friskkværnet peber_ and _sort peber_ are equivalent, but _peberfrugt_ is not. More exotic ingredients, like _rester_, also needed to be considered. In the end, we decided to cut the dependencies and create a manually cleaned ingredient database.
+
+The left part concerns the user: The user, the fridge(s) of the user (e.g. one at home and another in a cabin) and the ingredients in the fridge. The user can add ingredients in the app. The right side is the data from Arla. This data is static in the sense that it can only be modified when running the web scraper and manually imported.
+
+The tables are set up for cascading deletes and updates, and an index has been added on recipeIngredients.recipe to facilitate searches.
+
+The main query of the app is the search that matches the ingredients of the user (in fridgeIngredients) with the recipe ingredients (in recipeIngredients), see _Scripts/findRecipes.sql_ in order to find the recipes where the user has the most of the ingredients needed to make the recipe.
 
 # DATABASE SETUP
 The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder. The following command connects to PostgreSQL and creates a database called _g64_ and a user called _g64_user_:
@@ -61,3 +68,6 @@ NpgSql PostgreSQL can be installed through the extension manager.
 3) Wait a bit and Fridge App should open in your default browser
 
 If the C# Dev Kit is not installed, open Visual Studio Code, press Ctrl+Shift+X, search for and select _C# Dev Kit_.
+
+## Troubleshooting
+If the app does not open in your browser, a debug console should be opened by the dot net framework, which should contain a line like _Now listening on: http://localhost:5291_ . Open the url at the end in your browser.
