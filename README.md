@@ -1,12 +1,17 @@
 # Description TODO:
-The project is split into 4 parts, Fridge-core where most of the actual buisnes logic is handled, Scripts where the database querys are, Fridge-app the UI (the actual webapp), and WebScraper where we scrape the recipes from Arla 
+The project is split into 4 parts:
 
-# Idear TODO:
-The idear for our app was that the user would specify the ingrediants they have available and then we would show them a list of recipes ranked by how many of the needed ingrediants they have, the recipes are scraped from [Arla.dk](https://www.arla.dk/opskrifter/) and the idear is that this is an app we would make for Arla.
+* _FridgeCore_ where most of the actual buisnes logic is handled. 
+* _Scripts_ where the database querys are.
+* _Fridge-App_ the UI (the actual webapp).
+* _WebScraper_ where we scrape the recipes from Arla.
+
+# Idea TODO:
+The idea for our app was that the user would specify the ingredients they have available and then we would show them a list of recipes ranked by how many of the needed ingredients they have. The recipes are scraped from [Arla.dk](https://www.arla.dk/opskrifter/) and the idea is that this is an app we would make for Arla.
 
 # How to use the app TODO:
-To the left you will see your fridge where you can type in the name of an ingrediant and search for an ingredint (by pressing the serch button) and add it to your fridge via the add button, bellow where you add the ingrediants there is a list of ingrediants in your fridge.
-Based on the ingrediants in your fridge if you press the serch button (to the right) to get the top 3 recipes you could make (based on available ingrediants).
+To the left you will see your fridge where you can type in the name of an ingredient and search for an ingredient (by pressing the search button) and add it to your fridge via the add button, below where you add the ingrediants there is a list of ingredients in your fridge.
+Based on the ingrediants in your fridge if you press the search button (to the right) to get the top 3 recipes you could make (based on available ingredients).
 
 # ER Diagram TODO:
 ![.ERDiagram.png](https://github.com/Aether6969/Fridge-App/blob/master/ERDiagram.png)
