@@ -34,7 +34,7 @@ namespace FrigeCore.Server
                                 TotalTimeMin=reader.GetInt32(7),
                                 IsFreezable=reader.GetBoolean(8),
                                 Rating=reader.GetInt32(9),
-                                ImageLink=reader.GetString(10),
+                                ImageLink= reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
                                 IngrediantsAmount= new Ingredient[0],
                             };
                         string recipeIngredients = "SELECT ingredient,amount,unit FROM recipeingredients WHERE recipe = (@recipe)";
