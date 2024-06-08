@@ -63,13 +63,18 @@ namespace FridgeApp.Pages
                 addIngredients(AddTerm);
             }   
             if(Request.Form.ContainsKey("findRecipes")){
-                availableRecipes=findRecipes().Select((x) => Tuple.Create(x.Item1,x.Item2)).ToList();
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                availableRecipes =findRecipes().Select((x) => Tuple.Create(x.Item1,x.Item2)).ToList();
+                sw.Stop();
+                Console.WriteLine("Find recipes query in {0}", sw.Elapsed);
                 int recipesToShow = 3;
                 for(int i = 0; i < Math.Min(availableRecipes.Count,recipesToShow);i++)
                 {
                     Tuple<Recipe, int> recipe = availableRecipes[i];
                     availableRecipesContent += GetRecipeHtml(recipe.Item1, recipe.Item2);
                 }
+                Console.WriteLine("Recipe html generated in {0}", sw.Elapsed);
             }                                
             getfridge();
         }

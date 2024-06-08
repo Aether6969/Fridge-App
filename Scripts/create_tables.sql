@@ -4,7 +4,9 @@
 -- psql -h localhost -d g64 -U username < create_tables.sql
 --
 
--- Clear existing tables if any
+-- Clear existing tables and indices if any
+DROP INDEX IF EXISTS recipesNameIndex;
+DROP INDEX IF EXISTS recipeIngredientsNameIndex;
 DROP TABLE IF EXISTS fridgeIngredients;
 DROP TABLE IF EXISTS fridges;
 DROP TABLE IF EXISTS users;
@@ -29,6 +31,9 @@ CREATE TABLE recipes(
     PRIMARY KEY (name)
 );
 
+CREATE INDEX recipesNameIndex
+ON recipes(name);
+
 CREATE TABLE recipeIngredients(
     id BIGSERIAL NOT NULL, -- because recipe,ingredient,amount,unit are not guarenteed to be unique
     recipe TEXT,
@@ -41,6 +46,9 @@ CREATE TABLE recipeIngredients(
     -- effort, a foreign key on ingredients is not feasible.
     --FOREIGN KEY(ingredient) REFERENCES ingredients(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE INDEX recipeIngredientsNameIndex
+ON recipeIngredients(recipe);
 
 CREATE TABLE users(
     name TEXT, -- user names must be unique
