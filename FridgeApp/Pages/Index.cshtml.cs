@@ -74,7 +74,6 @@ namespace FridgeApp.Pages
                     Tuple<Recipe, int> recipe = availableRecipes[i];
                     availableRecipesContent += GetRecipeHtml(recipe.Item1, recipe.Item2);
                 }
-                Console.WriteLine("Recipe html generated in {0}", sw.Elapsed);
             }                                
             getfridge();
         }

@@ -1,5 +1,5 @@
 SELECT name AS results
 FROM ingredients 
-WHERE name LIKE @name
+WHERE LOWER(name) LIKE LOWER(@name)
 
 
