@@ -8,6 +8,7 @@ using System.Diagnostics.Metrics;
 using System.Text;
 
 using static FrigeCore.Server.Server;
+using static System.Net.WebRequestMethods;
 
 namespace FridgeApp.Pages
 {
@@ -65,10 +66,10 @@ namespace FridgeApp.Pages
                 availableRecipes=findRecipes().Select((x) => Tuple.Create(x.Item1,x.Item2)).ToList();
                 int recipesToShow = 3;
                 for(int i = 0; i < Math.Min(availableRecipes.Count,recipesToShow);i++)
-                    {
+                {
                     Tuple<Recipe, int> recipe = availableRecipes[i];
                     availableRecipesContent += GetRecipeHtml(recipe.Item1, recipe.Item2);
-                    }
+                }
             }                                
             getfridge();
         }
@@ -108,18 +109,22 @@ namespace FridgeApp.Pages
             string result = string.Empty; ;
             result = "<table class=\"recipes\">";
             // row 1: Total time + freezable | image
-            result += "<tr><tdstyle=\"color:blue\">" + recipe.TotalTimeMin + " MIN ";
+            result += "<tr><td style=\"color:blue\">" + recipe.TotalTimeMin + " MIN ";
             if (recipe.IsFreezable)
             {
                 result += "\n\n<font color=\"green\">KAN FRYSES</font>";
             }
-            result += "</td>";
+            result += "</td></tr>";
             if (recipe.ImageLink != null && recipe.ImageLink != string.Empty)
             {
-                result += "<td><img src=\"" + recipe.ImageLink + "\"/></td>";
+                result += "<tr><td><img src=\"" + recipe.ImageLink + "\"/></td></tr>";
+            }
+            else
+            {
+                result += "<tr><td><img src=\"https://www.arla.dk/UI/img/arla-logo.a7388293.svg\"/></td></tr>";
             }
             // row 2: Name + rating
-            result += "</tr><tr><td><a href=\"" + recipe.Link + "\">" + recipe.Name +
+            result += "<tr><td><a href=\"" + recipe.Link + "\">" + recipe.Name +
                 "</a>\t Karakter: <font color=\"green\">" + recipe.Rating + " af 100</font></td></tr>";
             // row 3: fraction of ingredients available
             result += "<tr><td> Du har " + fraction + "% af ingredienserne</td></tr>";
