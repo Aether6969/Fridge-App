@@ -5,7 +5,6 @@
 --
 
 -- Clear existing tables and indices if any
-DROP INDEX IF EXISTS recipesNameIndex;
 DROP INDEX IF EXISTS recipeIngredientsNameIndex;
 DROP TABLE IF EXISTS fridgeIngredients;
 DROP TABLE IF EXISTS fridges;
@@ -30,9 +29,6 @@ CREATE TABLE recipes(
     imageLink TEXT DEFAULT '' NOT NULL,
     PRIMARY KEY (name)
 );
-
-CREATE INDEX recipesNameIndex
-ON recipes(name);
 
 CREATE TABLE recipeIngredients(
     id BIGSERIAL NOT NULL, -- because recipe,ingredient,amount,unit are not guarenteed to be unique
