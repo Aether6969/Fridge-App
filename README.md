@@ -1,3 +1,6 @@
+TODO: description and idea
+TODO: ER diagram
+
 # DATABASE SETUP
 The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder. The following command connects to PostgreSQL and creates a database called _g64_ and a user called _g64_user_:
 
