@@ -9,7 +9,7 @@ To the left you will see your fridge where you can type in the name of an ingred
 Based on the ingrediants in your fridge if you press the serch button (to the right) to get the top 3 recipes you could make (based on available ingrediants).
 
 # ER Diagram TODO:
-![ER Diagram](.\ER Diagram.png)
+![.ERDiagram.png](https://github.com/Aether6969/Fridge-App/blob/master/ERDiagram.png)
 er diag description
 
 # DATABASE SETUP
