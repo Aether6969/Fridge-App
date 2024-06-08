@@ -22,7 +22,7 @@ namespace FridgeApp.Pages
         public List<string> SavedIngredients {get;set;}= new List<string>();
         public string IngredientSavedContent {get;set;}= "<select>"+ "</select>";
         //available Recipes
-        public List<Tuple<string,int>> availableRecipes {get;set;}= new  List<Tuple<string,int>> ();
+        public List<Tuple<Recipe,int>> availableRecipes {get;set;}= new  List<Tuple<Recipe,int>> ();
         public string availableRecipesContent{get;set;}= "<select>"+ "</select>";
 
         private readonly string connectionString = "Host=localhost;Port=5432;Database=g64;Username=g64_user;Password=g64_pwd_rule";
@@ -62,10 +62,10 @@ namespace FridgeApp.Pages
                 addIngredients(AddTerm);
             }   
             if(Request.Form.ContainsKey("findRecipes")){
-                availableRecipes=findRecipes().Select((x) => Tuple.Create(x.Item1.Name,x.Item2)).ToList();
-                foreach(Tuple<string,int>  recipe in  availableRecipes)
+                availableRecipes=findRecipes();
+                foreach(Tuple<Recipe,int>  recipe in  availableRecipes)
                     {
-                        availableRecipesContent += "<p>" + recipe.Item1+ " | " + recipe.Item2 + "</p>";
+                        availableRecipesContent += "<p>" + recipe.Item1.Name + " | " + recipe.Item1.RecipeType + " | " + recipe.Item2 + "</p>";
                     }
             }                                
             getfridge();

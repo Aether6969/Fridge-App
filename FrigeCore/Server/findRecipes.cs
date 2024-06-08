@@ -31,23 +31,29 @@ namespace FrigeCore.Server
                                 Name=reader.GetString(4),
                                 Link=reader.GetString(5),
                                 RecipeType=Enum.Parse<RecipeType>(reader.GetString(6)),
-                                TotalTimeMin=reader.GetInt(7),
-                                IsFreezable=reader.GetBool(8),
-                                Rating=reader.GetInt(9),
+                                TotalTimeMin=reader.GetInt32(7),
+                                IsFreezable=reader.GetBoolean(8),
+                                Rating=reader.GetInt32(9),
                                 ImageLink=reader.GetString(10),
                                 IngrediantsAmount= new Ingredient[0],
                             };
-                        string recipeIngredients = "SELECT ingredient FROM recipeingredients WHERE recipe = @recipe"
-                        recipeIngredients = recipeIngredients.Replace("@ingredient", recipe.Name);
+                        string recipeIngredients = "SELECT ingredient,amount,unit FROM recipeingredients WHERE recipe = (@recipe)";
                         List<Ingredient> ingredients = new List<Ingredient> ();
-                        using (NpgsqlCommand searchCommand = dataSource.CreateCommand(createTablesScript))
+                        using (NpgsqlCommand searchCommand1 = dataSource.CreateCommand(recipeIngredients))
                         {
-                            using (NpgsqlDataReader reader1 = searchCommand.ExecuteReader())
+                            searchCommand1.Parameters.Add(new("@recipe",recipe.Name));
+                            using (NpgsqlDataReader reader1 = searchCommand1.ExecuteReader())
                             {
                                 while (reader1.Read())
-                                    {       
-                                        ingredients.add(reader1.GetString(0));
-                                    }
+                                {
+                                    Ingredient ingredient = new Ingredient()
+                                    {
+                                        Name=reader1.GetString(0),
+                                        Amount=reader1.GetDouble(1),
+                                        Unit=reader1.GetString(2), 
+                                    };
+                                    ingredients.Add(ingredient);
+                                }
                             }
                         }
                         Ingredient[] ingredientss = ingredients.ToArray();
