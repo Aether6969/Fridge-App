@@ -1,8 +1,10 @@
+using FrigeCore.Structures;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 ﻿using Npgsql;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Text;
 
 using static FrigeCore.Server.Server;
@@ -61,10 +63,31 @@ namespace FridgeApp.Pages
         public void getfridge(){
             UserIngredientSearchResults = GetFridgeIngrediants("Bombur").Select((x) => x.Name).ToList();
             UserIngredientSavedContent = string.Empty;
-            foreach(string ingredient in  UserIngredientSearchResults)
+
+            // This is not the prettiest way to do this
+            UserIngredientSavedContent += "<table class=\"center\">";
+            int ingredientsPerRow = 3;
+            for (int i = 0; i < UserIngredientSearchResults.Count; i++)
             {
-                UserIngredientSavedContent += "<p>" + ingredient + "</p>";
+                string ingredient = UserIngredientSearchResults[i];
+                switch (i % ingredientsPerRow)
+                {
+                    case 0:
+                        UserIngredientSavedContent += "<tr><td>" + ingredient +"</td>";
+                        break;
+                    case 1:
+                        UserIngredientSavedContent += "<td>" + ingredient + "</td>";
+                        break;
+                    case 2:
+                        UserIngredientSavedContent += "<td>" + ingredient  + "</td></tr>";
+                        break;
+                }
             }
+            if (UserIngredientSearchResults.Count % ingredientsPerRow != 0)
+            {
+                UserIngredientSavedContent += "</tr>";
+            }
+            UserIngredientSavedContent += "</table>";
         }
     }
 }
