@@ -28,16 +28,31 @@ namespace FrigeCore.Server
                         {
                             Recipe recipe= new Recipe()
                             {
-                                Name=reader.GetString(0),
-                                Link="",
-                                RecipeType=RecipeType.Unknown,
-                                TotalTimeMin=0,
-                                IsFreezable=false,
-                                Rating=0,
-                                ImageLink="",
+                                Name=reader.GetString(4),
+                                Link=reader.GetString(5),
+                                RecipeType=Enum.Parse<RecipeType>(reader.GetString(6)),
+                                TotalTimeMin=reader.GetInt(7),
+                                IsFreezable=reader.GetBool(8),
+                                Rating=reader.GetInt(9),
+                                ImageLink=reader.GetString(10),
                                 IngrediantsAmount= new Ingredient[0],
                             };
-                            matches.Add(Tuple.Create(recipe, (int)reader.GetDouble(3)));
+                        string recipeIngredients = "SELECT ingredient FROM recipeingredients WHERE recipe = @recipe"
+                        recipeIngredients = recipeIngredients.Replace("@ingredient", recipe.Name);
+                        List<Ingredient> ingredients = new List<Ingredient> ();
+                        using (NpgsqlCommand searchCommand = dataSource.CreateCommand(createTablesScript))
+                        {
+                            using (NpgsqlDataReader reader1 = searchCommand.ExecuteReader())
+                            {
+                                while (reader1.Read())
+                                    {       
+                                        ingredients.add(reader1.GetString(0));
+                                    }
+                            }
+                        }
+                        Ingredient[] ingredientss = ingredients.ToArray();
+                        recipe.IngrediantsAmount=ingredientss;
+                        matches.Add(Tuple.Create(recipe, (int)reader.GetDouble(3)));
                         }
                     }
                 }
