@@ -53,26 +53,8 @@ namespace FridgeApp.Pages
                 IngredientSearchContent += "</select>";
             }
             if(Request.Form.ContainsKey("addIngredients")){
-                if (Request.Form.ContainsKey("addIngredients"))
-                {
-                    AddTerm = Request.Form["selectedIngredient"].ToString();
-                    if (!UserIngredientSearchResults.Contains(AddTerm))
-                    {
-                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-                        {
-                            connection.Open();
-                            FileInfo addIngredient = new FileInfo("../Scripts/addIngredient.sql");
-                            string addIngredientScript = addIngredient.OpenText().ReadToEnd();
-                            addIngredientScript = addIngredientScript.Replace("@ingredient", "'" + AddTerm + "'");
-                            addIngredientScript = addIngredientScript.Replace("@fridge", "3");
-                            using (NpgsqlCommand command = new NpgsqlCommand(addIngredientScript, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                }
-
+                AddTerm = Request.Form["selectedIngredient"].ToString();
+                addIngredients(AddTerm);
             }                               
             getfridge();
         }

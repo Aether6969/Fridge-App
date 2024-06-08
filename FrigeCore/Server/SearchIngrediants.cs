@@ -29,7 +29,6 @@ namespace FrigeCore.Server
                         };
                         ingredientSearchResults.Add(ingredient);
                     }
-                        Console.WriteLine("dkfjh "+ ingredientSearchResults.Count());
                     return ingredientSearchResults;
                 }
             }
