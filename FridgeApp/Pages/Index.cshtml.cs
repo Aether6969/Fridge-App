@@ -104,20 +104,26 @@ namespace FridgeApp.Pages
 
         public string GetRecipeHtml(Recipe recipe, int fraction)
         {
+            // another not so pretty approach
             string result = string.Empty; ;
             result = "<table class=\"recipes\">";
-            result += "<tr><td>" + recipe.TotalTimeMin + " MIN ";
+            // row 1: Total time + freezable | image
+            result += "<tr><tdstyle=\"color:blue\">" + recipe.TotalTimeMin + " MIN ";
             if (recipe.IsFreezable)
             {
-                result += "\n\nKAN FRYSES";
+                result += "\n\n<font color=\"green\">KAN FRYSES</font>";
             }
             result += "</td>";
             if (recipe.ImageLink != null && recipe.ImageLink != string.Empty)
             {
                 result += "<td><img src=\"" + recipe.ImageLink + "\"/></td>";
             }
-            result += "</tr><tr><td><a href=\"" + recipe.Link + "\">" + recipe.Name + "</a>\t Karakter: " + recipe.Rating + " af 100 </td></tr>";
+            // row 2: Name + rating
+            result += "</tr><tr><td><a href=\"" + recipe.Link + "\">" + recipe.Name +
+                "</a>\t Karakter: <font color=\"green\">" + recipe.Rating + " af 100</font></td></tr>";
+            // row 3: fraction of ingredients available
             result += "<tr><td> Du har " + fraction + "% af ingredienserne</td></tr>";
+            // row 4+: Ingredients of recipe
             foreach (Ingredient ingredient in recipe.IngrediantsAmount)
             {
                 result += "<tr><td>" + ingredient.Name + "</td></tr>";
