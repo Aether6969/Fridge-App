@@ -1,4 +1,4 @@
-# Description TODO:
+# Description
 The project is split into 4 parts:
 
 * _FridgeCore_ where most of the actual buisnes logic is handled. 
@@ -6,14 +6,14 @@ The project is split into 4 parts:
 * _Fridge-App_ the UI (the actual webapp).
 * _WebScraper_ where we scrape the recipes from Arla.
 
-# Idea TODO:
+# Idea
 The idea for our app was that the user would specify the ingredients they have available and then we would show them a list of recipes ranked by how many of the needed ingredients they have. The recipes are scraped from [Arla.dk](https://www.arla.dk/opskrifter/) and the idea is that this is an app we would make for Arla.
 
-# How to use the app TODO:
+# How to use the app
 To the left you will see your fridge where you can type in the name of an ingredient and search for an ingredient (by pressing the search button) and add it to your fridge via the add button, below where you add the ingrediants there is a list of ingredients in your fridge.
 Based on the ingrediants in your fridge if you press the search button (to the right) to get the top 3 recipes you could make (based on available ingredients).
 
-# ER Diagram TODO:
+# ER Diagram
 ![.ERDiagram.png](https://github.com/Aether6969/Fridge-App/blob/master/ERDiagram.png)
 
 As can be seen, the ER diagram consists of three "islands" that are isolated from each other. Originally, we had planned to let both fridgeIngredients and recipeIngredients have a relation to ingredients, but in order to make that work, we needed to put in significant post scraping work to do a propper mapping. As an example, _peber_, _friskkværnet peber_ and _sort peber_ are equivalent, but _peberfrugt_ is not. More exotic ingredients, like _rester_, also needed to be considered. In the end, we decided to cut the dependencies and create a manually cleaned ingredient database.
