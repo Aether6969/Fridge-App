@@ -37,8 +37,6 @@ Some operating systems and some setups may differ. Typical issues:
 1) The streaming operator < does not work. Use -f instead.
 2) The tables are created but nothing is loaded into them. This is typically a rights issue: The database script does not have access to the folders containing the csv files. Please grant access to _/Scripts_ and _/Fridge-App/ArlaRecipeScraper/Data_.
 
-TODO: ER diagram here or elsewhere in project?
-
 # COMPILE AND RUN
 
 ## In Visual Studio 2022 with ASP.NET and NpgSql installed
