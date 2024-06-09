@@ -5,7 +5,6 @@
     <h1 class="display-4">Fridge App</h1>
 </div>
 
-
 <div class="container">
     <div class="row mt-3">
         <div class="col-md-6 left-box">
@@ -34,17 +33,15 @@
                 <h1 class="text-center">Recipes</h1>
                 <h2 class="text-center mt-5">Available Recipes</h2>
                     <form method="post" enctype="multipart/form-data">
-                        <button type="submit" name="findRecipes" onclick="showAvailableRecipes()" >ADD</button>
+                        <button type="submit" name="findRecipes" onclick="showAvailableRecipes()" >Search</button>
                     </form>    
             </div>
             <div class="available-Recipes">
-                <h2 class="text-center mt-5">Available Recipes</h2>
                 @Html.Raw(Model.availableRecipesContent)
             </div>
         </div>
     </div>
 </div>
-
 
 <style>
     .left-box {
