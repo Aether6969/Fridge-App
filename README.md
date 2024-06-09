@@ -1,7 +1,7 @@
 # Description
 The project is split into 4 parts:
 
-* _FridgeCore_ where most of the actual buisnes logic is handled. 
+* _FridgeCore_ where most of the actual buisness logic is handled. 
 * _Scripts_ where the database querys are.
 * _Fridge-App_ the UI (the actual webapp).
 * _WebScraper_ where we scrape the recipes from Arla.
@@ -10,19 +10,20 @@ The project is split into 4 parts:
 The idea for our app was that the user would specify the ingredients they have available and then we would show them a list of recipes ranked by how many of the needed ingredients they have. The recipes are scraped from [Arla.dk](https://www.arla.dk/opskrifter/) and the idea is that this is an app we would make for Arla.
 
 # How to use the app
-To the left you will see your fridge where you can type in the name of an ingredient and search for an ingredient (by pressing the search button) and add it to your fridge via the add button, below where you add the ingrediants there is a list of ingredients in your fridge.
-Based on the ingrediants in your fridge if you press the search button (to the right) to get the top 3 recipes you could make (based on available ingredients).
+To the left you will see your fridge where you can add ingredients and see your list of ingredients. Type in the name of an ingredient and search for an ingredient (by pressing the search button). The ingredient can be added it to your fridge via the add button. The list of ingredients in your fridge is shown below the add button.
+
+To the right you can press the search button to get the top 3 recipes that you could make, based on and ranked by the available ingredients in your fridge. This contains a link to the full recipe on arla.dk.
 
 # ER Diagram
 ![.ERDiagram.png](https://github.com/Aether6969/Fridge-App/blob/master/ERDiagram.png)
 
-As can be seen, the ER diagram consists of three "islands" that are isolated from each other. Originally, we had planned to let both fridgeIngredients and recipeIngredients have a relation to ingredients, but in order to make that work, we needed to put in significant post scraping work to do a propper mapping. As an example, _peber_, _friskkværnet peber_ and _sort peber_ are equivalent, but _peberfrugt_ is not. More exotic ingredients, like _rester_, also needed to be considered. In the end, we decided to cut the dependencies and create a manually cleaned ingredient database.
+As can be seen, the ER diagram consists of three "islands" that are isolated from each other. Originally, we had planned to let both fridgeIngredients and recipeIngredients have a relation to ingredients, but in order to make that work, we needed to put in significant post scraping work to do a propper mapping. As an example, _peber_, _friskkværnet peber_ and _sort peber_ are equivalent, but _peberfrugt_ is not. More exotic ingredients, like _rester_, also needed to be considered. In the end, we decided to cut the dependencies and create a manually cleaned ingredient table.
 
-The left part concerns the user: The user, the fridge(s) of the user (e.g. one at home and another in a cabin) and the ingredients in the fridge. The user can add ingredients in the app. The right side is the data from Arla. This data is static in the sense that it can only be modified when running the web scraper and manually imported.
+The left part concerns the user: The user, the fridge(s) of the user (e.g. one at home and another in a cabin) and the ingredients in the fridge. Note that the app does not support changing user or adding more than one fridge. The user can add ingredients in the app. The right side is the data from Arla. This data is static in the sense that it can only be modified when running the web scraper and manually imported.
 
 The tables are set up for cascading deletes and updates, and an index has been added on recipeIngredients.recipe to facilitate searches.
 
-The main query of the app is the search that matches the ingredients of the user (in fridgeIngredients) with the recipe ingredients (in recipeIngredients), see _Scripts/findRecipes.sql_ in order to find the recipes where the user has the most of the ingredients needed to make the recipe.
+The main query of the app is the search that matches the ingredients of the user (in fridgeIngredients) with the recipe ingredients (in recipeIngredients), see _Scripts/findRecipes.sql_, in order to find the recipes where the user has the most of the ingredients needed to make the recipe.
 
 # DATABASE SETUP
 The scripts to setup and delete the tables are placed in the _Scripts_ folder. Open a terminal (Linux) or a command prompt (Windows) in the _Scripts_ folder. The following command connects to PostgreSQL and creates a database called _g64_ and a user called _g64_user_:
